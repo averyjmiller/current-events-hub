@@ -25,6 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	}
 
-	fetchFeaturedNews();
+	// fetchFeaturedNews();
 
 });
