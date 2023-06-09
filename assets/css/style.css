@@ -1,0 +1,11 @@
+.high-priority {
+    color: red;
+}
+
+.completed {
+    background-color: green;
+}
+
+.not-completed {
+    background-color: yellow;
+}

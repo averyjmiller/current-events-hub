@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-header text-center">Create New Task</div>
                     <div class="card-body">
-                        <form>
+                        <form id="taskForm">
                             <div class="form-group">
                                 <label for="taskInput">Task</label>
                                 <input type="text" class="form-control" id="taskInput" placeholder="Enter task">
@@ -47,11 +47,12 @@
                     </div>
                     <div class="card-footer footer-buttons">
                         <a href="index.html" class="btn btn-danger">Cancel</a>
-                        <button type="submit" class="btn btn-primary">Confirm</button>
+                        <button id="confirmButton" type="submit" class="btn btn-primary">Confirm</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="./assets/js/new-task.js"></script>
 </body>
 </html>
