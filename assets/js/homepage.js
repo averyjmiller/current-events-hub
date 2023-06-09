@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // ------------TASK MANAGER--------------
   const taskDateElement = document.getElementById('task-date');
   const date = new Date();
   const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
@@ -45,10 +46,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // ------------FEATURED NEWS--------------
 	// Key for mediastack API
 	var mediaKey = "877242f5effa43a7d5b13f42c4c74257";
 
-	// Fetch request function
+  var newsContentEl = document.querySelectorAll('.news-content');
+  var newsImgEl = document.querySelectorAll('#news-image');
+
+	// Fetch request function for 
 	function fetchFeaturedNews() {
 	  var mediaUrl = "http://api.mediastack.com/v1/news?access_key=" + mediaKey + "&countries=us&languages=en&sort=popularity&limit=2";
 
@@ -68,9 +73,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function renderFeaturedNews(news) {
-
+    console.log(news);
+    for(var i = 0; i < news.length; i++) {
+      newsImgEl[i].src = news[i].image;
+    }
 	}
 
-	// fetchFeaturedNews();
+	fetchFeaturedNews();
 		
 });

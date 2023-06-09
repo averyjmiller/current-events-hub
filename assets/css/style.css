@@ -11,3 +11,15 @@
     background-color: yellow;
 }
 
+aside {
+    height: 100vh;
+}
+
+.news {
+    height: 40%;
+}
+
+#news-image {
+    width: 100%;
+    border-radius: 0 2px 2px 0;
+}
