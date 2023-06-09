@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ------------FEATURED NEWS--------------
 	// Key for mediastack API
-	var mediaKey = "877242f5effa43a7d5b13f42c4c74257";
+	var mediaKey = "f286b15dd5aad98f7c1fcef560feaaa2";
 
   var newsContentEl = document.querySelectorAll('.news-content');
   var newsImgEl = document.querySelectorAll('#news-image');
