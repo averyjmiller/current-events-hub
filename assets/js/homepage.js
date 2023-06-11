@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Fetch request function for 
 	function fetchFeaturedNews() {
-	  var mediaUrl = "http://api.mediastack.com/v1/news?access_key=" + mediaKey + "&countries=us&languages=en&sort=popularity&limit=2";
+	  var mediaUrl = "http://api.mediastack.com/v1/news?access_key=" + mediaKey + "&countries=us&sort=published_asc&languages=en&limit=2";
 
 		fetch(mediaUrl, {
       method: 'GET'
@@ -78,13 +78,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	function renderFeaturedNews(news) {
     console.log(news);
+
     for(var i = 0; i < news.length; i++) {
-      featNewsImgEl[i].src = news[i].image;
-      featNewsSrcEl[i].innerHTML = news[i].author;
-      featNewsSrcEl[i].href = "https://" + news[i].author;
-      featNewsHeadEl[i].innerHTML = news[i].title;
-      featNewsHeadEl[i].href = news[i].url;
-      featNewsDescEl[i].innerHTML = news[i].description;
+      if(news[1].image) {
+        featNewsImgEl[i].src = news[i].image;
+      }
+      if(news[i].author) {
+        featNewsSrcEl[i].innerHTML = news[i].author;
+        featNewsSrcEl[i].href = "https://" + news[i].author;
+      }
+      if(news[i].title) {
+        featNewsHeadEl[i].innerHTML = news[i].title;
+      }
+      if(news[i].url) {
+        featNewsHeadEl[i].href = news[i].url;
+      }
+      if(news[i].description) {
+        var count = 0;
+        var description = news[i].description;
+        var limitedDesc = "";
+        while(count < 150 && description[count] != undefined) {
+          limitedDesc += description[count];
+          count++;
+        }
+        featNewsDescEl[i].innerHTML = limitedDesc + "...";
+      }
     }
 	}
 
