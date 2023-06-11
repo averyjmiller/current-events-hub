@@ -9,18 +9,8 @@
 .brand-text {
     font-size: 2rem;
     margin-left: 20px;
-}
-
-.high-priority {
-    color: red;
-}
-
-.completed {
-    background-color: green;
-}
-
-.not-completed {
-    background-color: yellow;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
 }
 
 aside {

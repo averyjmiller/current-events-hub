@@ -1,0 +1,23 @@
+#tasks .card {
+  height: 80px;
+  color: black;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.high-priority {
+  color: red;
+}
+
+.completed {
+  background-color: green;
+}
+
+.not-completed {
+  background-color: yellow;
+}
