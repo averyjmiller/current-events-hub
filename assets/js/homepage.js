@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Fetch request function for 
 	function fetchFeaturedNews() {
-	  var mediaUrl = "http://api.mediastack.com/v1/news?access_key=" + mediaKey + "&countries=us&sort=published_asc&languages=en&limit=2";
+	  var mediaUrl = "http://api.mediastack.com/v1/news?access_key=" + mediaKey + "&countries=us&languages=en&sort=popularity&limit=2";
 
 		fetch(mediaUrl, {
       method: 'GET'
@@ -82,16 +82,25 @@ document.addEventListener('DOMContentLoaded', function() {
     for(var i = 0; i < news.length; i++) {
       if(news[1].image) {
         featNewsImgEl[i].src = news[i].image;
+      } else {
+        featNewsImgEl[i].src = "./assets/images/default_news.jpeg";
       }
       if(news[i].author) {
         featNewsSrcEl[i].innerHTML = news[i].author;
         featNewsSrcEl[i].href = "https://" + news[i].author;
+      } else {
+        featNewsSrcEl[i].innerHTML = "Unknown";
+        featNewsSrcEl[i].href = "";
       }
       if(news[i].title) {
         featNewsHeadEl[i].innerHTML = news[i].title;
+      } else {
+        featNewsHeadEl[i].innerHTML = "";
       }
       if(news[i].url) {
         featNewsHeadEl[i].href = news[i].url;
+      } else {
+        featNewsHeadEl[i].href = "";
       }
       if(news[i].description) {
         var count = 0;
@@ -102,6 +111,8 @@ document.addEventListener('DOMContentLoaded', function() {
           count++;
         }
         featNewsDescEl[i].innerHTML = limitedDesc + "...";
+      } else {
+        featNewsDescEl[i].innerHTML = "";
       }
     }
 	}
