@@ -117,6 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 	}
 
-	fetchFeaturedNews();
+	// fetchFeaturedNews();
 		
 });

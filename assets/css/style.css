@@ -1,3 +1,11 @@
+.navbar div > * {
+    margin-right: 50px;
+}
+
+.brand-text {
+    font-size: 2rem;
+    margin-left: 20px;
+}
 
 .high-priority {
     color: red;
