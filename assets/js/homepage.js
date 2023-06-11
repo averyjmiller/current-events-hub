@@ -50,14 +50,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Key for mediastack API
 	var mediaKey = "f286b15dd5aad98f7c1fcef560feaaa2";
 
-  var newsContentEl = document.querySelectorAll('.news-content');
-  var newsImgEl = document.querySelectorAll('#news-image');
+  var featNewsImgEl = document.querySelectorAll('#news-image');
+  var featNewsSrcEl = document.querySelectorAll('#featured-source');
+  var featNewsHeadEl = document.querySelectorAll('#featured-header');
+  var featNewsDescEl = document.querySelectorAll('#featured-desc');
 
 	// Fetch request function for 
 	function fetchFeaturedNews() {
 	  var mediaUrl = "http://api.mediastack.com/v1/news?access_key=" + mediaKey + "&countries=us&languages=en&sort=popularity&limit=2";
 
-		fetch(mediaUrl)
+		fetch(mediaUrl, {
+      method: 'GET'
+    })
 			.then(function (response) {
 				if (response.ok) {
 					response.json().then(function (data) {
@@ -75,7 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	function renderFeaturedNews(news) {
     console.log(news);
     for(var i = 0; i < news.length; i++) {
-      newsImgEl[i].src = news[i].image;
+      featNewsImgEl[i].src = news[i].image;
+      featNewsSrcEl[i].innerHTML = "Featured • " + news[i].author;
+      featNewsHeadEl[i].innerHTML = news[i].title;
+      featNewsDescEl[i].innerHTML = news[i].description;
     }
 	}
 
