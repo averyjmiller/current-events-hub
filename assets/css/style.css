@@ -1,5 +1,9 @@
-.navbar div > * {
-    margin-right: 50px;
+.nav-items {
+    margin-right: 20px;
+}
+
+.nav-items > * {
+    margin-left: 50px;
 }
 
 .brand-text {
