@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var featNewsImgEl = document.querySelectorAll('#news-image');
   var featNewsSrcEl = document.querySelectorAll('#featured-source');
-  var featNewsHeadEl = document.querySelectorAll('#featured-header');
+  var featNewsHeadEl = document.querySelectorAll('#header-link');
   var featNewsDescEl = document.querySelectorAll('#featured-desc');
 
 	// Fetch request function for 
@@ -78,11 +78,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	function renderFeaturedNews(news) {
     console.log(news);
+
     for(var i = 0; i < news.length; i++) {
-      featNewsImgEl[i].src = news[i].image;
-      featNewsSrcEl[i].innerHTML = "Featured • " + news[i].author;
-      featNewsHeadEl[i].innerHTML = news[i].title;
-      featNewsDescEl[i].innerHTML = news[i].description;
+      if(news[1].image) {
+        featNewsImgEl[i].src = news[i].image;
+      } else {
+        featNewsImgEl[i].src = "./assets/images/default_news.jpeg";
+      }
+      if(news[i].author) {
+        featNewsSrcEl[i].innerHTML = news[i].author;
+        featNewsSrcEl[i].href = "https://" + news[i].author;
+      } else {
+        featNewsSrcEl[i].innerHTML = "Unknown";
+        featNewsSrcEl[i].href = "";
+      }
+      if(news[i].title) {
+        featNewsHeadEl[i].innerHTML = news[i].title;
+      } else {
+        featNewsHeadEl[i].innerHTML = "";
+      }
+      if(news[i].url) {
+        featNewsHeadEl[i].href = news[i].url;
+      } else {
+        featNewsHeadEl[i].href = "";
+      }
+      if(news[i].description) {
+        var count = 0;
+        var description = news[i].description;
+        var limitedDesc = "";
+        while(count < 150 && description[count] != undefined) {
+          limitedDesc += description[count];
+          count++;
+        }
+        featNewsDescEl[i].innerHTML = limitedDesc + "...";
+      } else {
+        featNewsDescEl[i].innerHTML = "";
+      }
     }
 	}
 
