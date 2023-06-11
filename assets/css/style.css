@@ -1,14 +1,16 @@
-
-.high-priority {
-    color: red;
+.nav-items {
+    margin-right: 20px;
 }
 
-.completed {
-    background-color: green;
+.nav-items > * {
+    margin-left: 50px;
 }
 
-.not-completed {
-    background-color: yellow;
+.brand-text {
+    font-size: 2rem;
+    margin-left: 20px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
 }
 
 aside {
