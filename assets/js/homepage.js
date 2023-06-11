@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var featNewsImgEl = document.querySelectorAll('#news-image');
   var featNewsSrcEl = document.querySelectorAll('#featured-source');
-  var featNewsHeadEl = document.querySelectorAll('#featured-header');
+  var featNewsHeadEl = document.querySelectorAll('#header-link');
   var featNewsDescEl = document.querySelectorAll('#featured-desc');
 
 	// Fetch request function for 
@@ -80,8 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(news);
     for(var i = 0; i < news.length; i++) {
       featNewsImgEl[i].src = news[i].image;
-      featNewsSrcEl[i].innerHTML = "Featured • " + news[i].author;
+      featNewsSrcEl[i].innerHTML = news[i].author;
+      featNewsSrcEl[i].href = "https://" + news[i].author;
       featNewsHeadEl[i].innerHTML = news[i].title;
+      featNewsHeadEl[i].href = news[i].url;
       featNewsDescEl[i].innerHTML = news[i].description;
     }
 	}
