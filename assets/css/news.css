@@ -1,0 +1,12 @@
+.form-select {
+  width: 100%;
+}
+
+button {
+  width: 115px;
+}
+
+.news {
+  flex-direction: row;
+  margin: 0 20px;
+}
