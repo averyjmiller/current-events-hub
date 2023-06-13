@@ -4,9 +4,25 @@
 
 button {
   width: 115px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(67, 170, 255);
+  color: white;
+  height: 30px;
+}
+
+.news-container {
+  margin-top: 50px;
+}
+
+.news-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .news {
   flex-direction: row;
-  margin: 0 20px;
+  margin: 20px 40px 20px 0;
+  width: 40%;
 }
