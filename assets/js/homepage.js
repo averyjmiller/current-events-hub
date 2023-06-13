@@ -50,9 +50,9 @@ tasks.forEach((task, index) => {
 // Key for mediastack API
 var mediaKey = "f286b15dd5aad98f7c1fcef560feaaa2";
 
-var featNewsImgEl = document.querySelectorAll('#news-image');
+var featNewsImgEl = document.querySelectorAll('#featured-image');
 var featNewsSrcEl = document.querySelectorAll('#featured-source');
-var featNewsHeadEl = document.querySelectorAll('#header-link');
+var featNewsHeadEl = document.querySelectorAll('#featured-header');
 var featNewsDescEl = document.querySelectorAll('#featured-desc');
 
 // Fetch request function for 
