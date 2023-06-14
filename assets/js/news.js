@@ -47,7 +47,7 @@ function renderNews(news) {
   console.log(news);
 
   for(var i = 0; i < news.length; i++) {
-    if(news[1].image) {
+    if(news[i].image) {
       newsImgEl[i].src = news[i].image;
     } else {
       newsImgEl[i].src = "./assets/images/default_news.jpeg";

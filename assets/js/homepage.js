@@ -209,7 +209,7 @@ async function storeIp(){
    console.log(newCity)
 }
 
-getIp();
+// getIp();
 
 
 
