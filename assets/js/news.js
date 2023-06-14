@@ -2,10 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 var mediaKey = "f286b15dd5aad98f7c1fcef560feaaa2";
 
-var newsImgEl = document.querySelectorAll('#news-image');
-var newsSrcEl = document.querySelectorAll('#news-source');
-var newsHeadEl = document.querySelectorAll('#news-header');
-var newsDescEl = document.querySelectorAll('#news-desc');
 var searchBtn = document.getElementById('search-btn');
 var selectEl = document.getElementById('topic-select');
 var defaultOptionEl = document.getElementById('default-option');
@@ -25,12 +21,15 @@ function submitHandler(event) {
 // Fetch request function for 
 function fetchNews(cat) {
   var sources = "cnn,nytimes,espn,cbs,msnbc,fox,tmz,bbc";
+  var today = dayjs().format('YYYY-MM-DD');
+  var yesterday = dayjs(today).subtract(1, 'day').format('YYYY-MM-DD');
 
   var mediaUrl = "http://api.mediastack.com/v1/news?" + 
   "access_key=" + mediaKey + 
   "&countries=us&languages=en" + 
   "&sources=" + sources +
   "&categories=" + cat +
+  "&date=" + yesterday + ',' + today +
   "&sort=popularity&limit=6";
 
   fetch(mediaUrl, {
@@ -39,7 +38,7 @@ function fetchNews(cat) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          renderNews(data.data)
+          renderNews(cat, data.data)
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -50,44 +49,75 @@ function fetchNews(cat) {
     });
 }
 
-function renderNews(news) {
+function renderNews(cat, news) {
   console.log(news);
 
-  for(var i = 0; i < news.length; i++) {
+  cat = cat.charAt(0).toUpperCase() + cat.slice(1) + " News";
+
+  document.getElementById('topic-header').innerHTML = cat;
+  document.querySelector('.news-info').innerHTML = "";
+
+  var image;
+  var source;
+  var publishedDate;
+  var title;
+  var url;
+  var rawDesc;
+  var desc;
+
+  for(var i = (news.length-1); i >= 0; i--) {
+
     if(news[i].image) {
-      newsImgEl[i].src = news[i].image;
+      image = news[i].image;
     } else {
-      newsImgEl[i].src = "./assets/images/default_news.jpeg";
+      image = "./assets/images/default_news.jpeg";
     }
-    if(news[i].author) {
-      newsSrcEl[i].innerHTML = news[i].author;
-      newsSrcEl[i].href = "https://" + news[i].author;
+    if(news[i].source) {
+      source = news[i].source;
     } else {
-      newsSrcEl[i].innerHTML = "Unknown";
-      newsSrcEl[i].href = "";
+      source = "Unknown";
+    }
+    if(news[i].published_at) {
+      publishedDate = news[i].published_at.slice(0, 10).split("-");
+      publishedDate = publishedDate[1] + "/" + publishedDate[2] + "/" + publishedDate[0];
+    } else {
+      publishedDate = "Unknown";
     }
     if(news[i].title) {
-      newsHeadEl[i].innerHTML = news[i].title;
+      title = news[i].title;
     } else {
-      newsHeadEl[i].innerHTML = "";
+      title = "";
     }
     if(news[i].url) {
-      newsHeadEl[i].href = news[i].url;
+      url = news[i].url;
     } else {
-      newsHeadEl[i].href = "";
+      url = "";
     }
     if(news[i].description) {
       var count = 0;
-      var description = news[i].description;
-      var limitedDesc = "";
-      while(count < 150 && description[count] != undefined) {
-        limitedDesc += description[count];
+      rawDesc = news[i].description;
+      desc = "";
+      while(count < 150 && rawDesc[count] != undefined) {
+        desc += rawDesc[count];
         count++;
       }
-      newsDescEl[i].innerHTML = limitedDesc + "...";
+      desc += "...";
     } else {
-      newsDescEl[i].innerHTML = "";
+      desc = "";
     }
+
+    document.querySelector('.news-info').innerHTML += `
+      <div class="news">
+        <div class="image">
+          <img src=${image} id="news-image"/>
+        </div> 
+        <div class="content">
+          <p>${source} • ${publishedDate}</p>
+          <h2><a id="news-header" href="" target="_blank">${title}</a></h2>
+          <p id="news-desc">${desc}</p>
+        </div>
+      </div>
+    `;
   }
 }
 
