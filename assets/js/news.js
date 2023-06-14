@@ -97,7 +97,7 @@ function renderNews(cat, news) {
       var count = 0;
       rawDesc = news[i].description;
       desc = "";
-      while(count < 200 && rawDesc[count] != undefined) {
+      while(count < 150 && rawDesc[count] != undefined) {
         desc += rawDesc[count];
         count++;
       }
