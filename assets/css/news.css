@@ -49,6 +49,10 @@ button {
   font-size: 1.5rem;
 }
 
+.page-btn {
+  width: 50px;
+}
+
 @media screen and (max-width: 768px) {
 
   #news-header {

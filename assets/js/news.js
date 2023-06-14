@@ -22,15 +22,17 @@ function submitHandler(event) {
 function fetchNews(cat) {
   var sources = "cnn,nytimes,espn,cbs,msnbc,fox,tmz,bbc";
   var today = dayjs().format('YYYY-MM-DD');
-  var yesterday = dayjs(today).subtract(1, 'day').format('YYYY-MM-DD');
+  var lastWeek = dayjs(today).subtract(7, 'day').format('YYYY-MM-DD');
 
   var mediaUrl = "http://api.mediastack.com/v1/news?" + 
   "access_key=" + mediaKey + 
-  "&countries=us&languages=en" + 
+  "&countries=us" +
+  "&languages=en" + 
   "&sources=" + sources +
   "&categories=" + cat +
-  "&date=" + yesterday + ',' + today +
-  "&sort=published_desc&limit=6";
+  "&date=" + lastWeek + ',' + today +
+  "&sort=published_desc" +
+  "&limit=30";
 
   fetch(mediaUrl, {
     method: 'GET'
@@ -38,7 +40,7 @@ function fetchNews(cat) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          renderNews(cat, data.data)
+          renderNews(cat, data.data);
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -57,56 +59,78 @@ function renderNews(cat, news) {
   document.getElementById('topic-header').innerHTML = cat;
   document.querySelector('.news-info').innerHTML = "";
 
-  var image;
-  var source;
-  var publishedDate;
-  var title;
-  var url;
-  var rawDesc;
-  var desc;
+  var numberOfPages = Math.ceil(news.length / 6);
 
-  for(var i = 0; i < news.length; i++) {
+  renderPageBtns(numberOfPages);
+  renderPage(1, news);
 
+  document.getElementById('pageBtn-container').addEventListener("click", function(event){
+    event.preventDefault();
+
+    var pageClicked = parseInt(event.target.id);
+    renderPage(pageClicked, news);
+  });
+
+}
+
+function renderPageBtns(pages) {
+  document.querySelector('#pageBtn-container').innerHTML = ``;
+
+  for(var i = 1; i <= pages; i++) {
+    document.querySelector('#pageBtn-container').innerHTML += `
+    <button class="page-btn" id="${i}">${i}</div>
+    `;
+  }
+}
+
+function renderPage(page, news) {
+
+  var start = (page * 6) - 6;
+  var end = page * 6;
+
+  var pageContents= ``;
+
+  for(var i = start; i < end && news[i] != undefined ; i++) {
     if(news[i].image) {
-      image = news[i].image;
+      var image = news[i].image;
     } else {
-      image = "./assets/images/default_news.jpeg";
+      var image = "./assets/images/default_news.jpeg";
     }
     if(news[i].source) {
-      source = news[i].source;
+      var source = news[i].source;
     } else {
-      source = "Unknown";
+      var source = "Unknown";
     }
     if(news[i].published_at) {
-      publishedDate = news[i].published_at.slice(0, 10).split("-");
+      var publishedDate = news[i].published_at.slice(0, 10).split("-");
       publishedDate = publishedDate[1] + "/" + publishedDate[2] + "/" + publishedDate[0];
     } else {
-      publishedDate = "Unknown";
+      var publishedDate = "Unknown";
     }
     if(news[i].title) {
-      title = news[i].title;
+      var title = news[i].title;
     } else {
-      title = "";
+      var title = "";
     }
     if(news[i].url) {
-      url = news[i].url;
+      var url = news[i].url;
     } else {
-      url = "";
+      var url = "";
     }
     if(news[i].description) {
       var count = 0;
-      rawDesc = news[i].description;
-      desc = "";
+      var rawDesc = news[i].description;
+      var desc = "";
       while(count < 150 && rawDesc[count] != undefined) {
         desc += rawDesc[count];
         count++;
       }
       desc += "...";
     } else {
-      desc = "";
+      var desc = "";
     }
-
-    document.querySelector('.news-info').innerHTML += `
+  
+    pageContents += `
       <div class="news">
         <div class="image">
           <img src=${image} id="news-image"/>
@@ -119,8 +143,11 @@ function renderNews(cat, news) {
       </div>
     `;
   }
+
+  document.querySelector('.news-info').innerHTML = pageContents;
+
 }
 
-searchBtn.addEventListener("click", submitHandler)
+searchBtn.addEventListener("click", submitHandler);
 
 });
