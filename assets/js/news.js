@@ -30,7 +30,7 @@ function fetchNews(cat) {
   "&sources=" + sources +
   "&categories=" + cat +
   "&date=" + yesterday + ',' + today +
-  "&sort=popularity&limit=6";
+  "&sort=published_desc&limit=6";
 
   fetch(mediaUrl, {
     method: 'GET'
@@ -65,7 +65,7 @@ function renderNews(cat, news) {
   var rawDesc;
   var desc;
 
-  for(var i = (news.length-1); i >= 0; i--) {
+  for(var i = 0; i < news.length; i++) {
 
     if(news[i].image) {
       image = news[i].image;
@@ -97,7 +97,7 @@ function renderNews(cat, news) {
       var count = 0;
       rawDesc = news[i].description;
       desc = "";
-      while(count < 150 && rawDesc[count] != undefined) {
+      while(count < 200 && rawDesc[count] != undefined) {
         desc += rawDesc[count];
         count++;
       }
