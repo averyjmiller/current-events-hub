@@ -120,8 +120,8 @@ function renderFeaturedNews(news) {
 // fetchFeaturedNews();
 
   // Token and Url 
-var accessToken = "85cf430545fec4"
-var ipUrl = "https://ipinfo.io/json?token="
+var accessToken = "85cf430545fec4";
+var ipUrl = "https://ipinfo.io/json?token=";
 
 // Fetch to the Api and runs function to store and slice it
 function getIp (){
@@ -136,93 +136,95 @@ function getIp (){
 
 // Function to store and slice the response
 async function storeIp(){
-  var response = await fetch(ipUrl + accessToken)
+  var response = await fetch(ipUrl + accessToken);
   var ip = await response.json();
-  var location = JSON.stringify(ip.loc)
-  var getCity = JSON.stringify(ip.city)
+  var location = JSON.stringify(ip.loc);
+  var getCity = JSON.stringify(ip.city);
   
 
   sliceCity();
   // Taking the quotes off the city name and storing it
   function sliceCity(){
-    getCity = getCity.replace('"', "")
-    getCity = getCity.replace('"', "")
-    localStorage.setItem("City", getCity)
+    getCity = getCity.replace('"', "");
+    getCity = getCity.replace('"', "");
+    localStorage.setItem("City", getCity);
   }
   
   // Function to split then slice up the lat and lon
   function cutIp(x){
-   var partOne = x.slice(0, x.length / 2)
-   var partTwo = x.slice(x.length / 2, x.length)
-   var partTwoCut = partTwo.replace(",", "")
+   var partOne = x.slice(0, x.length / 2);
+   var partTwo = x.slice(x.length / 2, x.length);
+   var partTwoCut = partTwo.replace(",", "");
 
     // Slice Lat
     if(partOne[1] === "-"){
-      var newLat = partOne.slice(1, 7)
-      localStorage.setItem("Latitude", newLat)
+      var newLat = partOne.slice(1, 7);
+      localStorage.setItem("Latitude", newLat);
     } else {
-      var newLat = partOne.slice(1, 6)
-      localStorage.setItem("Latitude", newLat)
+      var newLat = partOne.slice(1, 6);
+      localStorage.setItem("Latitude", newLat);
     }
   
    // Slice Lon
    if(partTwoCut.startsWith("-")){
     var newLon = partTwoCut.slice(0, 6);
-    localStorage.setItem("Longitude", newLon)
+    localStorage.setItem("Longitude", newLon);
    } else if(partTwoCut.startsWith(",")){
     var newLon = partTwoCut.slice(1, 6);
-    localStorage.setItem("Longitude", newLon)
+    localStorage.setItem("Longitude", newLon);
    } else {
     var newLon = partTwoCut.slice(0, 5);
-    localStorage.setItem("Longitude", newLon)
+    localStorage.setItem("Longitude", newLon);
    }
   }
 
   cutIp(location);
 
   // Getting lat and lon from localstorage to send into weather Api request
-  var Latitude = localStorage.getItem("Latitude")
-  var Longitude = localStorage.getItem("Longitude")
+  var Latitude = localStorage.getItem("Latitude");
+  var Longitude = localStorage.getItem("Longitude");
 
   fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + Latitude + "&lon=" + Longitude + "&appid=0f14b0df581c6adeaefe66badf8a8ffd&units=imperial")
    .then(function (response) {
     return response.json();
    })
    .then(function (data) {
-    localStorage.setItem("Weather", JSON.stringify(data))
-   })
-
-   // Weather object
-   var getWeather = JSON.parse(localStorage.getItem("Weather"))
-
-   // Date
-   var timeStamp = getWeather.dt
-   var day = new Date(timeStamp*1000);
-   var date = (day.toDateString())
-   var dateTag = document.getElementById("date")
-   dateTag.textContent = date
-
-   // Region
-   var region = ip.region
-   
-   // City text
-   var newCity = localStorage.getItem("City")
-   var cityName = document.getElementById("city1")
-   cityName.textContent = newCity + (", ") + region + (".")
-
-   // Temp text
-   var temp = document.getElementById("temp")
-   temp.textContent = getWeather.main.temp + ("°F")
-
-   // Humidity
-   var humidity1 = document.getElementById("humidity1")
-   humidity1.textContent = getWeather.main.humidity + ("%")
-
-   // Wind speed
-   var windSpeed1 = document.getElementById("windspeed")
-   windSpeed1.textContent = getWeather.wind.speed + (" Mph")
-   
+    localStorage.setItem("Weather", JSON.stringify(data));
+    renderWeather(ip);
+   })   
 }
+function renderWeather(ip) {
+     // Weather object
+     var getWeather = JSON.parse(localStorage.getItem("Weather"));
+
+     // Date
+     var timeStamp = getWeather.dt;
+     var day = new Date(timeStamp*1000);
+     var date = (day.toDateString());
+     var dateTag = document.getElementById("date");
+     dateTag.textContent = date;
+  
+     // Region
+     var region = ip.region;
+     
+     // City text
+     var newCity = localStorage.getItem("City");
+     var cityName = document.getElementById("city1");
+     cityName.textContent = newCity + (", ") + region + (".");
+  
+     // Temp text
+     var temp = document.getElementById("temp");
+     temp.textContent = getWeather.main.temp + ("°F");
+  
+     // Humidity
+     var humidity1 = document.getElementById("humidity1");
+     humidity1.textContent = getWeather.main.humidity + ("%");
+  
+     // Wind speed
+     var windSpeed1 = document.getElementById("windspeed");
+     windSpeed1.textContent = getWeather.wind.speed + (" Mph");
+}
+
  getIp();
 
 });
