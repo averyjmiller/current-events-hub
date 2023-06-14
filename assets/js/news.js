@@ -24,7 +24,14 @@ function submitHandler(event) {
 
 // Fetch request function for 
 function fetchNews(cat) {
-  var mediaUrl = "http://api.mediastack.com/v1/news?access_key=" + mediaKey + "&countries=us&languages=en&categories=" + cat + "&sort=popularity&limit=6";
+  var sources = "cnn,nytimes,espn,cbs,msnbc,fox,tmz,bbc";
+
+  var mediaUrl = "http://api.mediastack.com/v1/news?" + 
+  "access_key=" + mediaKey + 
+  "&countries=us&languages=en" + 
+  "&sources=" + sources +
+  "&categories=" + cat +
+  "&sort=popularity&limit=6";
 
   fetch(mediaUrl, {
     method: 'GET'
