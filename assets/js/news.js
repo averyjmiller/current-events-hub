@@ -113,7 +113,7 @@ function renderNews(cat, news) {
         </div> 
         <div class="content">
           <p>${source} • ${publishedDate}</p>
-          <h2><a id="news-header" href="" target="_blank">${title}</a></h2>
+          <h2><a id="news-header" href=${url} target="_blank">${title}</a></h2>
           <p id="news-desc">${desc}</p>
         </div>
       </div>
