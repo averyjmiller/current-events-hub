@@ -23,7 +23,7 @@ button {
 
 .news {
   flex-direction: row;
-  margin: 20px 40px 20px 0;
+  margin: 20px 0;
   width: 100%;
   min-height: 250px;
   max-height: 350px;
@@ -49,6 +49,12 @@ button {
   font-size: 1.5rem;
 }
 
+.header-page-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #pageBtn-container {
   margin-right: 2.5rem;
 }
@@ -67,4 +73,14 @@ button {
     font-size: 1rem;
   }
   
+}
+
+@media screen and (max-width: 576px) {
+  .header-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 }
