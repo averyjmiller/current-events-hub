@@ -134,7 +134,7 @@ function renderFeaturedNews(news) {
     </div>
   `;
   }
-  document.querySelector('.featured-news').innerHTML = newsContents;
+  document.querySelector('#featured-news').innerHTML = newsContents;
 }
 
 // fetchFeaturedNews();
