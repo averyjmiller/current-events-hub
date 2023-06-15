@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-var mediaKey = "f286b15dd5aad98f7c1fcef560feaaa2";
-
 var searchBtn = document.getElementById('search-btn');
 var selectEl = document.getElementById('topic-select');
 var defaultOptionEl = document.getElementById('default-option');
@@ -19,27 +17,25 @@ function submitHandler(event) {
 }
 
 function fetchNews(cat) {
-  var sources = "cnn,nytimes,espn,cbs,msnbc,fox,tmz,bbc";
-  var today = dayjs().format('YYYY-MM-DD');
-  var lastWeek = dayjs(today).subtract(7, 'day').format('YYYY-MM-DD');
 
-  var mediaUrl = "http://api.mediastack.com/v1/news?" + 
-  "access_key=" + mediaKey + 
-  "&countries=us" +
-  "&languages=en" + 
-  "&sources=" + sources +
-  "&categories=" + cat +
-  "&date=" + lastWeek + ',' + today +
-  "&sort=published_desc" +
-  "&limit=30";
+  var url = "https://api.newscatcherapi.com/v2/latest_headlines?" +
+  "countries=US" +
+  "&lang=en" +
+  "&topic=" + cat +
+  "&when=7d" +
+  "&page_size=30";
+  var options = {
+	method: 'GET',
+	headers: {
+		'x-api-key': 'nXw-bLLeQMcZrLQBtOZ6PpZiwZy4ypjSEpQ4j67k-0E',
+	}
+};
 
-  fetch(mediaUrl, {
-    method: 'GET'
-  })
+  fetch(url, options)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          renderNews(cat, data.data);
+          renderNews(cat, data.articles);
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -53,7 +49,11 @@ function fetchNews(cat) {
 function renderNews(cat, news) {
   console.log(news);
 
-  cat = cat.charAt(0).toUpperCase() + cat.slice(1) + " News";
+  if(cat != 'news') {
+    cat = cat.charAt(0).toUpperCase() + cat.slice(1) + " News";
+  } else {
+    cat = "General News";
+  }
 
   document.getElementById('topic-header').innerHTML = cat;
   document.querySelector('.news-info').innerHTML = "";
@@ -95,18 +95,18 @@ function renderPage(page, news) {
   var pageContents= ``;
 
   for(var i = start; i < end && news[i] != undefined ; i++) {
-    if(news[i].image) {
-      var image = news[i].image;
+    if(news[i].media) {
+      var image = news[i].media;
     } else {
       var image = "./assets/images/default_news.jpeg";
     }
-    if(news[i].source) {
-      var source = news[i].source;
+    if(news[i].clean_url) {
+      var source = news[i].clean_url;
     } else {
       var source = "Unknown";
     }
-    if(news[i].published_at) {
-      var publishedDate = news[i].published_at.slice(0, 10).split("-");
+    if(news[i].published_date) {
+      var publishedDate = news[i].published_date.slice(0, 10).split("-");
       publishedDate = publishedDate[1] + "/" + publishedDate[2] + "/" + publishedDate[0];
     } else {
       var publishedDate = "Unknown";
@@ -116,14 +116,14 @@ function renderPage(page, news) {
     } else {
       var title = "";
     }
-    if(news[i].url) {
-      var url = news[i].url;
+    if(news[i].link) {
+      var url = news[i].link;
     } else {
       var url = "";
     }
-    if(news[i].description) {
+    if(news[i].excerpt) {
       var count = 0;
-      var rawDesc = news[i].description;
+      var rawDesc = news[i].excerpt;
       var desc = "";
       while(count < 150 && rawDesc[count] != undefined) {
         desc += rawDesc[count];
