@@ -43,6 +43,13 @@ aside {
     font-size: 1.5rem;
 }
 
+.weather-icon-container {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
     .news {
         flex-direction: row;
