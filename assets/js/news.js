@@ -66,12 +66,13 @@ function renderNews(cat, news) {
   document.getElementById('pageBtn-container').addEventListener("click", function(event){
     event.preventDefault();
 
-    renderPageBtns(numberOfPages);
-
     var btnClicked = event.target;
-    var pageNumber = parseInt(btnClicked.id);
-
-    renderPage(pageNumber, news);
+    
+    if(btnClicked.nodeName == 'BUTTON') {
+      renderPageBtns(numberOfPages);
+      var pageNumber = parseInt(btnClicked.id);
+      renderPage(pageNumber, news);
+    }
   });
 
 }
