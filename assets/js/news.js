@@ -18,7 +18,6 @@ function submitHandler(event) {
   }
 }
 
-// Fetch request function for 
 function fetchNews(cat) {
   var sources = "cnn,nytimes,espn,cbs,msnbc,fox,tmz,bbc";
   var today = dayjs().format('YYYY-MM-DD');
@@ -67,8 +66,12 @@ function renderNews(cat, news) {
   document.getElementById('pageBtn-container').addEventListener("click", function(event){
     event.preventDefault();
 
-    var pageClicked = parseInt(event.target.id);
-    renderPage(pageClicked, news);
+    renderPageBtns(numberOfPages);
+
+    var btnClicked = event.target;
+    var pageNumber = parseInt(btnClicked.id);
+
+    renderPage(pageNumber, news);
   });
 
 }
@@ -145,6 +148,8 @@ function renderPage(page, news) {
   }
 
   document.querySelector('.news-info').innerHTML = pageContents;
+
+  document.getElementById(JSON.stringify(page)).classList.add('selected-page');
 
 }
 

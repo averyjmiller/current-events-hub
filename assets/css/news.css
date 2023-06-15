@@ -49,8 +49,16 @@ button {
   font-size: 1.5rem;
 }
 
+#pageBtn-container {
+  margin-right: 2.5rem;
+}
+
 .page-btn {
   width: 50px;
+}
+
+.selected-page {
+  background-color: rgb(150, 150, 150);
 }
 
 @media screen and (max-width: 768px) {
