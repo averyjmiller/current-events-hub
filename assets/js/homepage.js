@@ -119,12 +119,132 @@ function renderFeaturedNews(news) {
 
 // fetchFeaturedNews();
 
-  // Token and Url 
+//-------------------------------------------------------------------------------------------------------//
+
+// Modal to ask if U-Hub can use location. If not then you can enter a location
+
+window.onload = function() {
+  if (localStorage.getItem("Ask-Location") === null) {
+    askLoc();
+    localStorage.setItem("Ask-Location", true);
+  } else {
+    getIp();
+  }
+}
+
+function askLoc() {
+  var modal = document.getElementById("askLocation");
+  modal.style.display = "block";
+}
+
+document.getElementById("modalbtn").addEventListener("click", function(event){
+ event.preventDefault();
+ var btnClick2 = event.target.id;
+
+ if(btnClick2 === "yes-button") {
+  doWeather();
+ } else if (btnClick2 === "no-button") {
+  closeModal();
+  searchLoc();
+ }
+
+});
+
+function doWeather() {
+  var modal = document.getElementById("askLocation");
+  getIp();
+  modal.style.display = "none";
+}
+
+function closeModal() {
+  var modal = document.getElementById("askLocation");
+  modal.style.display = "none";
+}
+
+function searchLoc() {
+ var modal2 = document.getElementById("searchLocation")
+ modal2.style.display = "block";
+}
+
+function closeSearchLocation() {
+  var modal2 = document.getElementById("searchLocation")
+  modal2.style.display = "none";
+}
+
+
+
+var submitButton = document.getElementById("subBtn")
+
+submitButton.addEventListener("click", function(event){
+  event.preventDefault();
+  var clickSubmit = event.target.id;
+  var cityinput = document.getElementById("cityInput").value;
+
+  if (clickSubmit === ("subBtn")){
+    if (!cityinput){
+      showErrorModal();
+    } else {
+      checkState();
+    }
+  }
+});
+
+
+var stateOption = document.getElementById("noOption")
+
+function checkState() {
+  var cityinput = document.getElementById("cityInput").value;
+  var stateSelect = document.getElementById("stateInput");
+  var stateInput = document.getElementById("stateInput").value;
+  
+  
+  var optionSelected = stateSelect.options[stateSelect.selectedIndex].value
+
+  if(optionSelected != stateOption.value){
+    localStorage.setItem("City-Input", cityinput);
+    localStorage.setItem("State-Input", stateInput);
+    closeSearchLocation();
+  } else {
+    showErrorModal();
+  }
+};
+
+
+// Error Modal
+
+function showErrorModal() {
+  var modal3 = document.getElementById("searchError");
+  modal3.style.display = "block";
+}
+
+var okayButton = document.getElementById("modalbtn3");
+
+okayButton.addEventListener("click", function(event){
+  event.preventDefault;
+  var btnclick = event.target.id;
+
+  if (btnclick === "okayButton"){
+    closeErrorModal();
+  }
+});
+
+function closeErrorModal() {
+  var modal3 = document.getElementById("searchError")
+  modal3.style.display = "none";
+};
+
+
+
+//------------------------------------------------------------------------------------------------------------//
+
+// Token and Url for Ipinfo
 var accessToken = "85cf430545fec4";
 var ipUrl = "https://ipinfo.io/json?token=";
 
 // Fetch to the Api and runs function to store and slice it
 function getIp (){
+  accessToken = "85cf430545fec4";
+  ipUrl = "https://ipinfo.io/json?token=";
 
   fetch(ipUrl + accessToken).then(
     (response) => response.json()
@@ -184,6 +304,7 @@ async function storeIp(){
   var Latitude = localStorage.getItem("Latitude");
   var Longitude = localStorage.getItem("Longitude");
 
+  // Fetch for the weather Api fill lat and lon
   fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + Latitude + "&lon=" + Longitude + "&appid=0f14b0df581c6adeaefe66badf8a8ffd&units=imperial")
    .then(function (response) {
     return response.json();
@@ -193,8 +314,10 @@ async function storeIp(){
     renderWeather(ip);
    })   
 }
+
+// Function to apply all data to the html
 function renderWeather(ip) {
-     // Weather object
+     // Parsing Weather object
      var getWeather = JSON.parse(localStorage.getItem("Weather"));
 
      // Date
@@ -204,10 +327,10 @@ function renderWeather(ip) {
      var dateTag = document.getElementById("date");
      dateTag.textContent = date;
   
-     // Region
+     // Region (State)
      var region = ip.region;
      
-     // City text
+     // Adding city text and region to html header
      var newCity = localStorage.getItem("City");
      var cityName = document.getElementById("city1");
      cityName.textContent = newCity + (", ") + region + (".");
@@ -225,7 +348,12 @@ function renderWeather(ip) {
      windSpeed1.textContent = getWeather.wind.speed + (" Mph");
 }
 
- getIp();
+ //getIp();
 
 });
+
+// Clicking cards to go to weather
+function cardClick() {
+  window.location.href = "weather.html";
+}
 

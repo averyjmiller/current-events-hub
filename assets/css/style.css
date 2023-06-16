@@ -48,13 +48,22 @@ aside {
     border-radius: 15px;
 }
 
+.tempcard:hover {
+    box-shadow: 5px 6px 6px 2px #0000008e;
+    transform: scale(1.1);
+    background-color: #ececec;
+    cursor: pointer;
+}
+
 .weather-background {
     background-color: #6e9df4c9;
 }
 
 .weather-header {
-    background-color: lemonchiffon;
+    background-color: #9e9e9e8e;
 }
+
+
 
 @media screen and (max-width: 768px) {
     .news {
@@ -78,5 +87,5 @@ aside {
     #news-image {
         border-radius: 3px 0 0 3px;
     }
-    
+
 }
