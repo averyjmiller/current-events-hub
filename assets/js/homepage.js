@@ -324,12 +324,18 @@ function storeIp(ip){
   // Fetch for the weather Api fill lat and lon
   fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + Latitude + "&lon=" + Longitude + "&appid=0f14b0df581c6adeaefe66badf8a8ffd&units=imperial")
    .then(function (response) {
-    return response.json();
+    if(response.ok) {
+      response.json().then(function (data) {
+        localStorage.setItem("Weather", JSON.stringify(data));
+        renderWeather(ip);
+      });
+    } else {
+      document.location.replace('./error.html');
+    }
    })
-   .then(function (data) {
-    localStorage.setItem("Weather", JSON.stringify(data));
-    renderWeather(ip);
-   })   
+  .catch(function (error) {
+    document.location.replace('./error.html');
+  });
 }
 
 // Function to apply all data to the html
