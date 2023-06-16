@@ -254,37 +254,37 @@ function closeErrorModal() {
 };
 
 // ------------REQUEST IP & GET WEATHER--------------
-// Token and Url for Ipinfo
-var accessToken = "85cf430545fec4";
-var ipUrl = "https://ipinfo.io/json?token=";
-
 // Fetch to the Api and runs function to store and slice it
 function getIp (){
   accessToken = "85cf430545fec4";
   ipUrl = "https://ipinfo.io/json?token=";
-
-  fetch(ipUrl + accessToken).then(
-    (response) => response.json()
-  ).then(
-    (jsonResponse) => (storeIp())
-  )
-
+  
+  fetch(ipUrl + accessToken)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          storeIp(data);
+        });
+      } else {
+        document.location.replace('./error.html');
+      }
+    })
+    .catch(function (error) {
+      document.location.replace('./error.html');
+    });
 }
 
 // Function to store and slice the response
-async function storeIp(){
-  var response = await fetch(ipUrl + accessToken);
-  var ip = await response.json();
+function storeIp(ip){
   var location = JSON.stringify(ip.loc);
-  var getCity = JSON.stringify(ip.city);
-  
+  var city = JSON.stringify(ip.city);
 
   sliceCity();
   // Taking the quotes off the city name and storing it
   function sliceCity(){
-    getCity = getCity.replace('"', "");
-    getCity = getCity.replace('"', "");
-    localStorage.setItem("City", getCity);
+    city = city.replace('"', "");
+    city = city.replace('"', "");
+    localStorage.setItem("City", city);
   }
   
   // Function to split then slice up the lat and lon
