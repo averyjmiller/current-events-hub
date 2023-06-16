@@ -38,11 +38,11 @@ function fetchNews(cat) {
           renderNews(cat, data.articles);
         });
       } else {
-        alert('Error: ' + response.statusText);
+        document.location.replace('./error.html');
       }
     })
     .catch(function (error) {
-      alert('Unable to connect to API');
+      document.location.replace('./error.html');
     });
 }
 
