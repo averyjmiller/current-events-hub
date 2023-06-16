@@ -47,74 +47,94 @@ tasks.forEach((task, index) => {
 });
 
 // ------------FEATURED NEWS--------------
-// Key for mediastack API
-var mediaKey = "f286b15dd5aad98f7c1fcef560feaaa2";
-
-var featNewsImgEl = document.querySelectorAll('#news-image');
-var featNewsSrcEl = document.querySelectorAll('#featured-source');
-var featNewsHeadEl = document.querySelectorAll('#header-link');
-var featNewsDescEl = document.querySelectorAll('#featured-desc');
-
-// Fetch request function for 
 function fetchFeaturedNews() {
-  var mediaUrl = "http://api.mediastack.com/v1/news?access_key=" + mediaKey + "&countries=us&languages=en&sort=popularity&limit=2";
+  var url = "https://api.newscatcherapi.com/v2/latest_headlines?" +
+  "countries=US" +
+  "&lang=en" +
+  "&when=1h" +
+  "&topic=news" +
+  "&page_size=2";
+  var options = {
+	method: 'GET',
+	headers: {
+		'x-api-key': 'nXw-bLLeQMcZrLQBtOZ6PpZiwZy4ypjSEpQ4j67k-0E',
+	}
+};
 
-  fetch(mediaUrl, {
-    method: 'GET'
-  })
+  fetch(url, options)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          renderFeaturedNews(data.data)
+          renderFeaturedNews(data.articles);
         });
       } else {
-        alert('Error: ' + response.statusText);
+        document.location.replace('./error.html');;
       }
     })
     .catch(function (error) {
-      alert('Unable to connect to API');
+      document.location.replace('./error.html');;
     });
 }
 
 function renderFeaturedNews(news) {
   console.log(news);
 
+  var newsContents= ``;
+
   for(var i = 0; i < news.length; i++) {
-    if(news[1].image) {
-      featNewsImgEl[i].src = news[i].image;
+    if(news[1].media) {
+      var image = news[i].media;
     } else {
-      featNewsImgEl[i].src = "./assets/images/default_news.jpeg";
+      var image = "./assets/images/default_news.jpeg";
     }
-    if(news[i].author) {
-      featNewsSrcEl[i].innerHTML = news[i].author;
-      featNewsSrcEl[i].href = "https://" + news[i].author;
+    if(news[i].clean_url) {
+      var source = news[i].clean_url;
     } else {
-      featNewsSrcEl[i].innerHTML = "Unknown";
-      featNewsSrcEl[i].href = "";
+      var source = "Unknown";
+    }
+    if(news[i].published_date) {
+      var publishedDate = news[i].published_date.slice(0, 10).split("-");
+      publishedDate = publishedDate[1] + "/" + publishedDate[2] + "/" + publishedDate[0];
+    } else {
+      var publishedDate = "Unknown";
     }
     if(news[i].title) {
-      featNewsHeadEl[i].innerHTML = news[i].title;
+      var title = news[i].title;
     } else {
-      featNewsHeadEl[i].innerHTML = "";
+      var title = "";
     }
-    if(news[i].url) {
-      featNewsHeadEl[i].href = news[i].url;
+    if(news[i].link) {
+      var url = news[i].link;
     } else {
-      featNewsHeadEl[i].href = "";
+      var url = "";
     }
-    if(news[i].description) {
+    if(news[i].excerpt) {
       var count = 0;
-      var description = news[i].description;
-      var limitedDesc = "";
-      while(count < 150 && description[count] != undefined) {
-        limitedDesc += description[count];
+      var rawDesc = news[i].excerpt;
+      var desc = "";
+      while(count < 150 && rawDesc[count] != undefined) {
+        desc += rawDesc[count];
         count++;
       }
-      featNewsDescEl[i].innerHTML = limitedDesc + "...";
+      desc += "...";
     } else {
-      featNewsDescEl[i].innerHTML = "";
+      var desc = "";
     }
+
+    newsContents += `
+    <div class="news">
+      <div class="image">
+        <img src=${image} id="featured-image"/>
+      </div> 
+      <div class="content">
+        <p>${source} • ${publishedDate}</p>
+        <h2><a id="featured-header" href=${url} target="_blank">${title}</a></h2>
+        <p id="featured-desc">${desc}</p>
+      </div>
+    </div>
+  `;
   }
+  document.querySelector('#featured-news').innerHTML = newsContents;
 }
 
 // fetchFeaturedNews();
@@ -233,10 +253,7 @@ function closeErrorModal() {
   modal3.style.display = "none";
 };
 
-
-
-//------------------------------------------------------------------------------------------------------------//
-
+// ------------REQUEST IP & GET WEATHER--------------
 // Token and Url for Ipinfo
 var accessToken = "85cf430545fec4";
 var ipUrl = "https://ipinfo.io/json?token=";
