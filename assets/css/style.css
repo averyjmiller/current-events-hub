@@ -24,13 +24,14 @@ aside h2 {
 }
 
 .row {
-    background-color: red;
+    background-color: #1fb8648e;
+    
 }
 
 .news {
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 0px 5px 3px #b21717;
+    box-shadow: 0px 0px 5px 3px #1783b2;
     border-radius: 5px;
     width: 100%;
     margin-bottom: 20px;
@@ -51,6 +52,7 @@ aside h2 {
     font-size: 1.5rem;
 }
 
+
 .tempcard {
     box-shadow: 0px 0px 10px 5px #0000008e;
     border-radius: 15px;
@@ -64,7 +66,7 @@ aside h2 {
 }
 
 .weather-background {
-    background-color: #0a172ec9;
+    background-color: #f79148c9;
 }
 
 .weather-header {
@@ -78,9 +80,12 @@ aside h2 {
     justify-content: center;
 }
 
-#topbar {
-    background-color: orange;
+#featured-news {
+    overflow:scroll;
+    background-color: #1fb8648e;
+    
 }
+
 
 @media screen and (max-width: 768px) {
     .news {

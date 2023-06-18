@@ -57,7 +57,7 @@ function fetchFeaturedNews() {
   var options = {
 	method: 'GET',
 	headers: {
-		'x-api-key': 'nXw-bLLeQMcZrLQBtOZ6PpZiwZy4ypjSEpQ4j67k-0E',
+		'x-api-key': 'P1cnisvTQ4UkwDkzqjDOhVLJgZQeWNTCBLXzW5W0Gvc',
 	}
 };
 
