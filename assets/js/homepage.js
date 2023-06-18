@@ -137,7 +137,7 @@ function renderFeaturedNews(news) {
   document.querySelector('#featured-news').innerHTML = newsContents;
 }
 
-// fetchFeaturedNews();
+ fetchFeaturedNews();
 
 //-------------------------------------------------------------------------------------------------------//
 

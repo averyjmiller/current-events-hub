@@ -23,10 +23,14 @@ aside h2 {
     text-align: center;
 }
 
+.row {
+    background-color: red;
+}
+
 .news {
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 0px 5px 3px #9b9b9b;
+    box-shadow: 0px 0px 5px 3px #b21717;
     border-radius: 5px;
     width: 100%;
     margin-bottom: 20px;
@@ -60,11 +64,11 @@ aside h2 {
 }
 
 .weather-background {
-    background-color: #6e9df4c9;
+    background-color: #0a172ec9;
 }
 
 .weather-header {
-    background-color: #9e9e9e8e;
+    background-color: #1fb8648e;
 }
 
 .weather-icon-container {
@@ -72,6 +76,10 @@ aside h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#topbar {
+    background-color: orange;
 }
 
 @media screen and (max-width: 768px) {
@@ -96,5 +104,6 @@ aside h2 {
     #news-image {
         border-radius: 3px 0 0 3px;
     }
+    
 
 }
