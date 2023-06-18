@@ -146,7 +146,6 @@ function renderFeaturedNews(news) {
 window.onload = function() {
   if (localStorage.getItem("Ask-Location") === null) {
     askLoc();
-    localStorage.setItem("Ask-Location", true);
   } else {
     getIp();
   }
@@ -162,6 +161,7 @@ document.getElementById("modalbtn").addEventListener("click", function(event){
  var btnClick2 = event.target.id;
 
  if(btnClick2 === "yes-button") {
+  localStorage.setItem("Ask-Location", true);
   doWeather();
  } else if (btnClick2 === "no-button") {
   closeModal();
@@ -224,6 +224,7 @@ function checkState() {
     localStorage.setItem("City-Input", cityinput);
     localStorage.setItem("State-Input", stateInput);
     closeSearchLocation();
+    fetchSearchLocation();
   } else {
     showErrorModal();
   }
@@ -374,3 +375,82 @@ function cardClick() {
   window.location.href = "weather.html";
 }
 
+function fetchSearchLocation(){
+
+  var cityInput = localStorage.getItem("City-Input")
+  var stateInput = localStorage.getItem("State-Input")
+
+
+  fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "," + stateInput + "," + "US&appid=a68ad8fbcadf849a4a00973e9e0219b0")
+  .then(function (response) {
+  return response.json();
+  })
+  .then(function (data) {
+    if(data.length < 1) {
+      function searchLoc() {
+        var modal2 = document.getElementById("searchLocation")
+        modal2.style.display = "block";
+      };
+      function showErrorModal() {
+        var modal3 = document.getElementById("searchError");
+        modal3.style.display = "block";
+      };
+      searchLoc();
+      showErrorModal();
+    } else {
+      localStorage.setItem("Geocode", JSON.stringify(data));
+      renderSearchWeather();
+    };
+  });
+
+  function renderSearchWeather() {
+    var searchWeatherData = JSON.parse(localStorage.getItem("Geocode"))
+    var searchLat = searchWeatherData[0].lat
+    var searchLon = searchWeatherData[0].lon
+    var searchCity = searchWeatherData[0].name
+    var searchState = searchWeatherData[0].state
+
+
+    fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + searchLat + "&lon=" + searchLon + "&appid=0f14b0df581c6adeaefe66badf8a8ffd&units=imperial")
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+     (localStorage.setItem("Weather", JSON.stringify(data)))
+     renderWeather();   
+    })
+    
+    function renderWeather() {
+      // Parsing Weather object
+      var getWeather = JSON.parse(localStorage.getItem("Weather"));
+
+      // Date
+      var timeStamp = getWeather.dt;
+      var day = new Date(timeStamp*1000);
+      var date = (day.toDateString());
+      var dateTag = document.getElementById("date");
+      dateTag.textContent = date;
+  
+      // Region (State)
+      var region = searchState;
+      
+      // Adding city text and region to html header
+      var newCity = searchCity;
+      var cityName = document.getElementById("city1");
+      cityName.textContent = newCity + (", ") + region + (".");
+  
+      // Temp text
+      var temp = document.getElementById("temp");
+      temp.textContent = getWeather.main.temp + ("°F");
+  
+      // Humidity
+      var humidity1 = document.getElementById("humidity1");
+      humidity1.textContent = getWeather.main.humidity + ("%");
+  
+      // Wind speed
+      var windSpeed1 = document.getElementById("windspeed");
+      windSpeed1.textContent = getWeather.wind.speed + (" Mph");
+    }
+
+  };
+};
