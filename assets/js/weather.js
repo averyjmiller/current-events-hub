@@ -1,9 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let cityHistory = [];
+    const api_key = "11944d78b578fc7016e5a575aaac5c41";
+    const units = "imperial";
     
-    let latitude = localStorage.getItem("latitude");
-    let longitude = localStorage.getItem("longitude");
-    let city = localStorage.getItem("city");
+    let cityHistory = [];
+
+    let uhub = JSON.parse(localStorage.getItem("uhub"));
+    let latitude = uhub.homeLocation.lat;
+    let longitude = uhub.homeLocation.lon;
+    let city = uhub.homeLocation.city;
 
     if(latitude && longitude) {
         getWeather(latitude, longitude);
@@ -26,8 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    const api_key = "11944d78b578fc7016e5a575aaac5c41";
-    const units = "imperial";
 
     function getWeather(latitude, longitude) {
         let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=${units}`;
@@ -145,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function() {
             historyDisplay.appendChild(btn);
         }
     }
-});
 
 	function fetchErrorModal(err) {
     var errModal = document.getElementById("fetchError");
