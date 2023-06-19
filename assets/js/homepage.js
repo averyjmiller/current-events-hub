@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#featured-news').innerHTML = newsContents;
   }
 
-  // fetchFeaturedNews();
+  fetchFeaturedNews();
 
   //-------------------------------------------------------------------------------------------------------//
 
