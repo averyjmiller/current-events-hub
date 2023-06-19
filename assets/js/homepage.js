@@ -68,11 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
             renderFeaturedNews(data.articles);
           });
         } else {
-          document.location.replace('./error.html');;
+          fetchErrorModal(response.status + " - " + response.statusText);
         }
       })
       .catch(function (error) {
-        document.location.replace('./error.html');;
+        fetchErrorModal(error);
       });
   }
 
@@ -283,11 +283,11 @@ document.addEventListener('DOMContentLoaded', function() {
             storeIp(data);
           });
         } else {
-          document.location.replace('./error.html');
+          fetchErrorModal(response.status + " - " + response.statusText);
         }
       })
       .catch(function (error) {
-        document.location.replace('./error.html');
+        fetchErrorModal(error);
       });
   }
 
@@ -348,11 +348,11 @@ document.addEventListener('DOMContentLoaded', function() {
           renderWeather(data);
         });
       } else {
-        document.location.replace('./error.html');
+        fetchErrorModal(response.status + " - " + response.statusText);
       }
     })
     .catch(function (error) {
-      document.location.replace('./error.html');
+      fetchErrorModal(error);
     });
   }
 
@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(function (data) {
       if(data.length < 1) {
         function searchLoc() {
-          var modal2 = document.getElementById("searchLocation")
+          var modal2 = document.getElementById("searchLocation");
           modal2.style.display = "block";
         };
         function showErrorModal() {
@@ -418,4 +418,22 @@ document.addEventListener('DOMContentLoaded', function() {
       };
     });
   };
+
+  function fetchErrorModal(err) {
+    var errModal = document.getElementById("fetchError");
+    errModal.innerHTML = `
+    <div class="modal-content">
+      <h5>${err}</h5>
+      <p>Something went wrong on our end.</p>
+      <button id="dismiss-btn">Dismiss</button>
+    </div>
+    `;
+    errModal.style.display = "block";
+
+    document.getElementById("dismiss-btn").addEventListener("click", function(event) {
+      event.preventDefault();
+
+      errModal.style.display = "none";
+    });
+  }
 });
