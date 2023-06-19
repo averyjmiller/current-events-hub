@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/askLocModal.css"/>
+    <link rel="stylesheet" href="./assets/css/tasks.css"/>
     <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body>
@@ -32,12 +33,15 @@
         </div>
     </nav>
     <div class="container-fluid mt-4">
+        <header>
+          <h1>Home</h1>
+        </header>
         <div class="row">
-            <aside class="col-md-4 col-lg-3 col-xl-2 col-xxl-2 h-100">
+            <aside class="col-md-4 col-lg-3 h-100">
                 <h2>Featured News</h2>
                 <div id="featured-news"></div>
             </aside>
-            <main class="col-md-8 col-lg-9 col-xl-10 col-xxl-10">
+            <main class="col-md-8 col-lg-9">
                 <div class="card mb-4">
                     <div class="card-header text-center weather-header">
                         <span id="city"><h3>Current weather in</h3></span>
@@ -81,7 +85,7 @@
                 <div class="card mb-4 text-center">
                     <div class="card-header">
                         Tasks for <span id="task-date">{Date}</span>
-                        <a href="new-task.html" class="btn btn-primary btn-sm float-end">+</a>
+                        <a class="btn btn-primary btn-sm float-end" id="add-task">+</a>
                     </div>
                     <div class="card-body" id="tasks"></div>
                 </div>
@@ -173,6 +177,26 @@
                       </div>
                     </div>
                 </div>
+                <!-- New Task Modal -->
+                <div class="modal" id="new-task">
+                  <div class="modal-content">
+                    <h5>Create New Task</h5>
+                    <form id="taskForm">
+                        <div class="form-group">
+                            <label for="taskInput">Task</label>
+                            <input type="text" class="form-control" id="taskInput" placeholder="Enter task">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="priorityCheck">
+                            <label class="form-check-label" for="priorityCheck">Mark as high priority</label>
+                        </div>
+                    </form>
+                    <div id="task-btns">
+                      <button id="cancelButton" class="btn btn-danger">Cancel</button>
+                      <button id="confirmButton" type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
+                  </div>
+              </div>
                 <!-- Fetch Request Error Modal -->
                 <div id="fetchError" class="modal"></div>
           </main>

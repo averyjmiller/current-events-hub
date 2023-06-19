@@ -18,7 +18,7 @@ function submitHandler(event) {
 
 function fetchNews(cat) {
 
-  var url = "xhttps://api.newscatcherapi.com/v2/latest_headlines?" +
+  var url = "https://api.newscatcherapi.com/v2/latest_headlines?" +
   "countries=US" +
   "&lang=en" +
   "&topic=" + cat +
@@ -141,7 +141,7 @@ function renderPage(page, news) {
         </div> 
         <div class="content">
           <p>${source} • ${publishedDate}</p>
-          <h2><a id="news-header" href=${url} target="_blank">${title}</a></h2>
+          <h3><a id="news-header" href=${url} target="_blank">${title}</a></h3>
           <p id="news-desc">${desc}</p>
         </div>
       </div>

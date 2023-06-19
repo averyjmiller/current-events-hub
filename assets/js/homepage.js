@@ -1,49 +1,111 @@
 document.addEventListener('DOMContentLoaded', function() {
   // ------------TASK MANAGER--------------
-  const taskDateElement = document.getElementById('task-date');
-  const date = new Date();
-  const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-  taskDateElement.textContent = dateString;
+  function renderTasks() {
+    const taskDateElement = document.getElementById('task-date');
+    const date = new Date();
+    const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    taskDateElement.textContent = dateString;
 
-  const tasksContainer = document.getElementById('tasks');
-  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const tasksContainer = document.getElementById('tasks');
+    tasksContainer.innerHTML = "";
+    var uhub = JSON.parse(localStorage.getItem("uhub"));
+    let tasks = uhub.tasks;
 
-  tasks.sort((a, b) => b.priority - a.priority);
+    tasks.sort((a, b) => b.priority - a.priority);
 
-  tasks.forEach((task, index) => {
-    let taskCard = document.createElement('div');
-    taskCard.className = "card mb-3";
-    taskCard.style.color = "black";
+    localStorage.setItem("uhub", JSON.stringify(uhub));
 
-    if(task.priority && !task.completed) {
-      taskCard.style.backgroundColor = "red";
-    } else if(task.completed) {
-      taskCard.style.backgroundColor = "green";
-    } else {
-      taskCard.style.backgroundColor = "yellow";
+    tasks.forEach((task, index) => {
+      let taskCard = document.createElement('div');
+      taskCard.className = "card mb-3 not-completed";
+      taskCard.style.color = "black";
+
+      if(task.priority) {
+        taskCard.classList.add('high-priority');
+      }
+      if(task.completed) {
+        taskCard.classList.remove('not-completed');
+        taskCard.classList.add('completed');
+      }
+
+      taskCard.innerHTML = `
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <i id="trash${index}" class="fas fa-trash"></i>
+            ${task.text}
+            <input id="check${index}" type="checkbox" ${task.completed ? "checked" : ""}>
+        </div>
+      `;
+
+      tasksContainer.appendChild(taskCard);
+    });
+  }
+
+  document.getElementById('add-task').addEventListener('click', function() {
+    var modal = document.getElementById("new-task");
+    modal.style.display = "block";
+    document.getElementById('taskInput').focus();
+  });
+
+  document.getElementById('task-btns').addEventListener('click', function(e) {
+    e.preventDefault();
+    var buttonClicked = e.target;
+
+    if(buttonClicked.id == 'confirmButton') {
+      let taskInput = document.getElementById('taskInput');
+      let priorityCheck = document.getElementById('priorityCheck');
+
+      var uhub = JSON.parse(localStorage.getItem("uhub"));
+      let tasks = uhub.tasks;
+
+      tasks.push({
+          text: taskInput.value,
+          priority: priorityCheck.checked,
+          completed: false
+      });
+
+      taskInput.value = "";
+      priorityCheck.checked = false;
+
+      localStorage.setItem("uhub", JSON.stringify(uhub));
+      var modal = document.getElementById("new-task");
+      modal.style.display = "none";
+      renderTasks();
+    } else if(buttonClicked.id == 'cancelButton') {
+      var modal = document.getElementById("new-task");
+      modal.style.display = "none";
+      taskInput.value = "";
+      priorityCheck.checked = false;
     }
+  });
 
-    taskCard.innerHTML = `
-      <div class="card-body d-flex justify-content-between align-items-center">
-        <i id="trash${index}" class="fas fa-trash"></i>
-          ${task.text}
-          <input id="check${index}" type="checkbox" ${task.completed ? "checked" : ""}>
-      </div>
-    `;
-
-    tasksContainer.appendChild(taskCard);
-
-    document.getElementById(`trash${index}`).addEventListener('click', function() {
+  document.getElementById('tasks').addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = e.target;
+    if(target.id.includes('trash')) {
+      var index = target.id.slice(5);
+      var uhub = JSON.parse(localStorage.getItem("uhub"));
+      let tasks = uhub.tasks;
       tasks.splice(index, 1);
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-      location.reload(); 
-    });
+      localStorage.setItem("uhub", JSON.stringify(uhub));
+      renderTasks();
+    }
+  });
 
-    document.getElementById(`check${index}`).addEventListener('change', function() {
-      tasks[index].completed = this.checked;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-      location.reload();
-    });
+  document.getElementById('tasks').addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = e.target;
+    if(target.id.includes('check')) {
+      var index = target.id.slice(5);
+      var uhub = JSON.parse(localStorage.getItem("uhub"));
+      let tasks = uhub.tasks;
+      if(tasks[index].completed) {
+        tasks[index].completed = false;
+      } else {
+        tasks[index].completed = true;
+      }
+      localStorage.setItem("uhub", JSON.stringify(uhub));
+      renderTasks();
+    }
   });
 
   // ------------FEATURED NEWS--------------
@@ -128,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div> 
         <div class="content">
           <p>${source} • ${publishedDate}</p>
-          <h2><a id="featured-header" href=${url} target="_blank">${title}</a></h2>
+          <h3><a id="featured-header" href=${url} target="_blank">${title}</a></h3>
           <p id="featured-desc">${desc}</p>
         </div>
       </div>
@@ -137,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#featured-news').innerHTML = newsContents;
   }
 
-  // fetchFeaturedNews();
+  fetchFeaturedNews();
 
   //-------------------------------------------------------------------------------------------------------//
 
@@ -148,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (uhub === null) {
       askLoc();
     } else {
+      renderTasks();
       fetchWeather();
     }
   }
@@ -169,17 +232,20 @@ document.addEventListener('DOMContentLoaded', function() {
           lat: '',
           lon: ''
       },
+      tasks: [],
       savedLocations: []
     };
 
     if(btnClick2 === "yes-button") {
       uhub.allowLocation = true;
       localStorage.setItem("uhub", JSON.stringify(uhub));
+      renderTasks();
       doWeather();
     } else if (btnClick2 === "no-button") {
       uhub.allowLocation = false;
       localStorage.setItem("uhub", JSON.stringify(uhub));
       closeModal();
+      renderTasks();
       searchLoc();
     }
   });

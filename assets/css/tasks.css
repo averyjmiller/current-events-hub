@@ -1,8 +1,6 @@
 #tasks .card {
   height: 80px;
   color: black;
-  font-weight: bold;
-  font-size: xx-large;
 }
 
 .footer-buttons {
@@ -10,14 +8,19 @@
   justify-content: space-between;
 }
 
+.not-completed {
+  background-color: rgb(255, 255, 158);
+}
+
 .high-priority {
-  color: red;
+  background-color: rgb(255, 153, 153);
 }
 
 .completed {
-  background-color: green;
+  background-color: rgb(159, 255, 159);
+  text-decoration: line-through;
 }
 
-.not-completed {
-  background-color: yellow;
+#tasks i:hover {
+  cursor: pointer;
 }
