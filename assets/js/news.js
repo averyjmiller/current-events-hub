@@ -18,7 +18,7 @@ function submitHandler(event) {
 
 function fetchNews(cat) {
 
-  var url = "xhttps://api.newscatcherapi.com/v2/latest_headlines?" +
+  var url = "https://api.newscatcherapi.com/v2/latest_headlines?" +
   "countries=US" +
   "&lang=en" +
   "&topic=" + cat +
