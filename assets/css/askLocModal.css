@@ -21,7 +21,7 @@
 }
 
 .modal-content h5 {
-  margin-bottom: 2%;
+  margin-bottom: 5px;
 }
 
 .yes-button,
@@ -56,4 +56,19 @@
 .okayButton:hover {
   background-color: rgb(210, 210, 210);
   cursor: pointer;
+}
+
+#task-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+#task-btns button {
+  width: 75px;
+  text-align: center;
+  padding: 1px;
+}
+
+#taskForm > * {
+  margin: 20px 0;
 }

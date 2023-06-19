@@ -13,17 +13,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     tasks.sort((a, b) => b.priority - a.priority);
 
+    localStorage.setItem("uhub", JSON.stringify(uhub));
+
     tasks.forEach((task, index) => {
       let taskCard = document.createElement('div');
-      taskCard.className = "card mb-3";
+      taskCard.className = "card mb-3 not-completed";
       taskCard.style.color = "black";
 
-      if(task.priority && !task.completed) {
-        taskCard.style.backgroundColor = "red";
-      } else if(task.completed) {
-        taskCard.style.backgroundColor = "green";
-      } else {
-        taskCard.style.backgroundColor = "yellow";
+      if(task.priority) {
+        taskCard.classList.add('high-priority');
+      }
+      if(task.completed) {
+        taskCard.classList.remove('not-completed');
+        taskCard.classList.add('completed');
       }
 
       taskCard.innerHTML = `
@@ -37,6 +39,32 @@ document.addEventListener('DOMContentLoaded', function() {
       tasksContainer.appendChild(taskCard);
     });
   }
+
+  document.getElementById('add-task').addEventListener('click', function() {
+    var modal = document.getElementById("new-task");
+    modal.style.display = "block";
+  });
+
+  document.getElementById('confirmButton').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    let taskInput = document.getElementById('taskInput');
+    let priorityCheck = document.getElementById('priorityCheck');
+
+    var uhub = JSON.parse(localStorage.getItem("uhub"));
+    let tasks = uhub.tasks;
+
+    tasks.push({
+        text: taskInput.value,
+        priority: priorityCheck.checked,
+        completed: false
+    });
+
+    localStorage.setItem("uhub", JSON.stringify(uhub));
+    var modal = document.getElementById("new-task");
+    modal.style.display = "none";
+    renderTasks();
+});
 
   document.getElementById('tasks').addEventListener('click', function(e) {
     e.preventDefault();
