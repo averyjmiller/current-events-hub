@@ -82,6 +82,25 @@ button {
     height: 30px;
 }
 
+#add-task {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+}
+
+@media screen and (min-width: 1500px) {
+    .container-fluid {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .container-fluid {
+        width: 70%;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .news {
         flex-direction: row;
