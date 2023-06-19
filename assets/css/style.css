@@ -82,6 +82,18 @@ button {
     height: 30px;
 }
 
+@media screen and (min-width: 1500px) {
+    .container-fluid {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .container-fluid {
+        width: 70%;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .news {
         flex-direction: row;
