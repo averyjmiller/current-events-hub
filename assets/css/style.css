@@ -13,6 +13,11 @@
     letter-spacing: 2px;
 }
 
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 aside {
     height: 600px;
     display: flex;
@@ -21,6 +26,10 @@ aside {
 
 aside h2 {
     text-align: center;
+    background-color: lightgrey;
+    margin: 0;
+    border-radius: 3px 3px 0 0;
+    padding: 10px;
 }
 
 .news {
