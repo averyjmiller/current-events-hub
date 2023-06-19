@@ -1,0 +1,74 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 75%;
+  max-width: 500px;
+}
+
+.modal-content h5 {
+  margin-bottom: 5px;
+}
+
+.yes-button,
+.no-button {
+  padding: 5px;
+  margin: 5px;
+}
+
+.yes-button:hover,
+.no-button:hover {
+  background-color: rgb(210, 210, 210);
+  cursor: pointer;
+}
+
+.submitSearch {
+  padding: 5px;
+  margin-top: 2%;
+
+}
+
+.submitSearch:hover {
+  background-color: rgb(210, 210, 210);
+  cursor: pointer;
+}
+
+.modalbtn3 {
+  padding: 5px;
+  margin-top: 2%;
+
+}
+
+.okayButton:hover {
+  background-color: rgb(210, 210, 210);
+  cursor: pointer;
+}
+
+#task-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+#task-btns button {
+  width: 75px;
+  text-align: center;
+  padding: 1px;
+}
+
+#taskForm > * {
+  margin: 20px 0;
+}

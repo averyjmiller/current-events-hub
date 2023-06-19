@@ -146,3 +146,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+	function fetchErrorModal(err) {
+    var errModal = document.getElementById("fetchError");
+    errModal.innerHTML = `
+    <div class="modal-content">
+      <h5>${err}</h5>
+      <p>Something went wrong on our end.</p>
+      <button id="dismiss-btn">Dismiss</button>
+    </div>
+    `;
+    errModal.style.display = "block";
+
+    document.getElementById("dismiss-btn").addEventListener("click", function(event) {
+      event.preventDefault();
+
+      errModal.style.display = "none";
+    });
+  }
+});
