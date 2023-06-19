@@ -18,7 +18,7 @@ function submitHandler(event) {
 
 function fetchNews(cat) {
 
-  var url = "https://api.newscatcherapi.com/v2/latest_headlines?" +
+  var url = "xhttps://api.newscatcherapi.com/v2/latest_headlines?" +
   "countries=US" +
   "&lang=en" +
   "&topic=" + cat +
@@ -38,11 +38,11 @@ function fetchNews(cat) {
           renderNews(cat, data.articles);
         });
       } else {
-        document.location.replace('./error.html');
+        fetchErrorModal(response.status + " - " + response.statusText);
       }
     })
     .catch(function (error) {
-      document.location.replace('./error.html');
+      fetchErrorModal(error);
     });
 }
 
@@ -156,4 +156,21 @@ function renderPage(page, news) {
 
 searchBtn.addEventListener("click", submitHandler);
 
+function fetchErrorModal(err) {
+  var errModal = document.getElementById("fetchError");
+  errModal.innerHTML = `
+  <div class="modal-content">
+    <h5>${err}</h5>
+    <p>Something went wrong on our end.</p>
+    <button id="dismiss-btn">Dismiss</button>
+  </div>
+  `;
+  errModal.style.display = "block";
+
+  document.getElementById("dismiss-btn").addEventListener("click", function(event) {
+    event.preventDefault();
+
+    errModal.style.display = "none";
+  });
+}
 });
