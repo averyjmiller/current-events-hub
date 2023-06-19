@@ -43,28 +43,40 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('add-task').addEventListener('click', function() {
     var modal = document.getElementById("new-task");
     modal.style.display = "block";
+    document.getElementById('taskInput').focus();
   });
 
-  document.getElementById('confirmButton').addEventListener('click', function(e) {
+  document.getElementById('task-btns').addEventListener('click', function(e) {
     e.preventDefault();
+    var buttonClicked = e.target;
 
-    let taskInput = document.getElementById('taskInput');
-    let priorityCheck = document.getElementById('priorityCheck');
+    if(buttonClicked.id == 'confirmButton') {
+      let taskInput = document.getElementById('taskInput');
+      let priorityCheck = document.getElementById('priorityCheck');
 
-    var uhub = JSON.parse(localStorage.getItem("uhub"));
-    let tasks = uhub.tasks;
+      var uhub = JSON.parse(localStorage.getItem("uhub"));
+      let tasks = uhub.tasks;
 
-    tasks.push({
-        text: taskInput.value,
-        priority: priorityCheck.checked,
-        completed: false
-    });
+      tasks.push({
+          text: taskInput.value,
+          priority: priorityCheck.checked,
+          completed: false
+      });
 
-    localStorage.setItem("uhub", JSON.stringify(uhub));
-    var modal = document.getElementById("new-task");
-    modal.style.display = "none";
-    renderTasks();
-});
+      taskInput.value = "";
+      priorityCheck.checked = false;
+
+      localStorage.setItem("uhub", JSON.stringify(uhub));
+      var modal = document.getElementById("new-task");
+      modal.style.display = "none";
+      renderTasks();
+    } else if(buttonClicked.id == 'cancelButton') {
+      var modal = document.getElementById("new-task");
+      modal.style.display = "none";
+      taskInput.value = "";
+      priorityCheck.checked = false;
+    }
+  });
 
   document.getElementById('tasks').addEventListener('click', function(e) {
     e.preventDefault();
