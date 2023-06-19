@@ -18,16 +18,10 @@ font-size: 4em;
 section.text-center {
 padding-bottom: 3em;
 }
-#city-search-form button {
-background-color: rgb(184, 184, 184);
-color: rgb(0, 0, 0);
-}
-#search-history button {
-background-color: lightgrey;
-margin: 5px;
-text-transform: capitalize;
-text-align: center;
-padding: 10px 20px;
+.custom-card-color {
+background-color: rgb(67, 170, 255);
+color: white;
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 </style>
 </head>
@@ -55,12 +49,12 @@ Weather
 <div id="search-box">
 <form id="city-search-form">
 <input type="text" id="city-input" placeholder="Search for a city...">
-<button id="search-btn" style="text-align: center; padding: 10px 20px;">Search</button>
+<button id="search-btn">Search</button>
 </form>
 <div id="search-history">
 </div>
 </div>
-<section class="text-center mb-12">
+<section class="text-center mb-12 bg-blue-500 rounded p-4 max-w-lg mx-auto shadow-2xl" style="background-color: rgb(67, 170, 255);">
 <i class="fas fa-sun fa-6x mb-4" id="current-weather-icon"></i>
 <h2 class="text-4xl mb-2" id="city-name">City Name</h2>
 <h4 class="text-2xl mb-2" id="current-date"></h4>
@@ -72,39 +66,41 @@ Weather
 </section>
 
 
+
 <section>
-<div class="grid grid-cols-5 gap-4 mb-6">
-<div class="border rounded p-2 text-center shadow-lg relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px;">
-<span class="absolute top-2 left-2 text-sm" id="forecast-date-1">Day 1</span>
-<i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-1"></i>
-<h4 class="text-xl mb-2" id="forecast-temp-1">Predicted Temp</h4>
-<p class="text-sm" id="forecast-desc-1">Chance of Rain</p>
+  <div class="grid grid-cols-5 gap-4 mb-6">
+    <div class="border rounded p-2 text-center shadow-2xl relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px; background-color: rgb(67, 170, 255);">
+        <span class="absolute top-2 left-2 text-sm" id="forecast-date-1">Day 1</span>
+        <i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-1"></i>
+        <h4 class="text-xl mb-2" id="forecast-temp-1">Predicted Temp</h4>
+        <p class="text-sm" id="forecast-desc-1">Chance of Rain</p>
+    </div>
+    <div class="border rounded p-2 text-center shadow-2xl relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px; background-color: rgb(67, 170, 255);">
+        <span class="absolute top-2 left-2 text-sm" id="forecast-date-2">Day 2</span>
+        <i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-2"></i>
+        <h4 class="text-xl mb-2" id="forecast-temp-2">Predicted Temp</h4>
+        <p class="text-sm" id="forecast-desc-2">Chance of Rain</p>
+    </div>
+    <div class="border rounded p-2 text-center shadow-2xl relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px; background-color: rgb(67, 170, 255);">
+        <span class="absolute top-2 left-2 text-sm" id="forecast-date-3">Day 3</span>
+        <i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-3"></i>
+        <h4 class="text-xl mb-2" id="forecast-temp-3">Predicted Temp</h4>
+        <p class="text-sm" id="forecast-desc-3">Chance of Rain</p>
+    </div>
+    <div class="border rounded p-2 text-center shadow-2xl relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px; background-color: rgb(67, 170, 255);">
+        <span class="absolute top-2 left-2 text-sm" id="forecast-date-4">Day 4</span>
+        <i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-4"></i>
+        <h4 class="text-xl mb-2" id="forecast-temp-4">Predicted Temp</h4>
+        <p class="text-sm" id="forecast-desc-4">Chance of Rain</p>
+    </div>
+    <div class="border rounded p-2 text-center shadow-2xl relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px; background-color: rgb(67, 170, 255);">
+        <span class="absolute top-2 left-2 text-sm" id="forecast-date-5">Day 5</span>
+        <i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-5"></i>
+        <h4 class="text-xl mb-2" id="forecast-temp-5">Predicted Temp</h4>
+        <p class="text-sm" id="forecast-desc-5">Chance of Rain</p>
+    </div>
 </div>
-<div class="border rounded p-2 text-center shadow-lg relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px;">
-<span class="absolute top-2 left-2 text-sm" id="forecast-date-2">Day 2</span>
-<i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-2"></i>
-<h4 class="text-xl mb-2" id="forecast-temp-2">Predicted Temp</h4>
-<p class="text-sm" id="forecast-desc-2">Chance of Rain</p>
-</div>
-<div class="border rounded p-2 text-center shadow-lg relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px;">
-<span class="absolute top-2 left-2 text-sm" id="forecast-date-3">Day 3</span>
-<i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-3"></i>
-<h4 class="text-xl mb-2" id="forecast-temp-3">Predicted Temp</h4>
-<p class="text-sm" id="forecast-desc-3">Chance of Rain</p>
-</div>
-<div class="border rounded p-2 text-center shadow-lg relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px;">
-<span class="absolute top-2 left-2 text-sm" id="forecast-date-4">Day 4</span>
-<i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-4"></i>
-<h4 class="text-xl mb-2" id="forecast-temp-4">Predicted Temp</h4>
-<p class="text-sm" id="forecast-desc-4">Chance of Rain</p>
-</div>
-<div class="border rounded p-2 text-center shadow-lg relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px;">
-<span class="absolute top-2 left-2 text-sm" id="forecast-date-5">Day 5</span>
-<i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-5"></i>
-<h4 class="text-xl mb-2" id="forecast-temp-5">Predicted Temp</h4>
-<p class="text-sm" id="forecast-desc-5">Chance of Rain</p>
-</div>
-</div>
+
 </section>
   <!-- Fetch Request Error Modal -->
   <div id="fetchError" class="modal"></div>
