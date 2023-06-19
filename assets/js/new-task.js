@@ -4,7 +4,8 @@ document.getElementById('confirmButton').addEventListener('click', function(e) {
     let taskInput = document.getElementById('taskInput');
     let priorityCheck = document.getElementById('priorityCheck');
 
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    var uhub = JSON.parse(localStorage.getItem("uhub"));
+    let tasks = uhub.tasks;
 
     tasks.push({
         text: taskInput.value,
@@ -12,7 +13,7 @@ document.getElementById('confirmButton').addEventListener('click', function(e) {
         completed: false
     });
 
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem("uhub", JSON.stringify(uhub));
 
     window.location.href = "index.html";
 });
