@@ -14,26 +14,29 @@
         <link rel="stylesheet" href="./assets/css/weather.css"/>
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
                 <span class="navbar-brand brand-text h1">U-HUB</span>
                 <div class="nav-items d-flex justify-content-end">
-                    <a href="./index.html" class="d-inline-block align-top text-center underline text-blue-600">
-                        <i class="fas fa-home fa-lg text-blue-600"></i><br>
+                    <a href="./index.html" class="d-inline-block align-top text-center" id="nav-links">
+                        <i class="fas fa-home fa-lg"></i><br>
                             Home
                     </a>
-                    <a href="./news.html" class="d-inline-block align-top text-center underline text-blue-600">
-                        <i class="far fa-newspaper fa-lg text-blue-600"></i><br>
+                    <a href="./news.html" class="d-inline-block align-top text-center" id="nav-links">
+                        <i class="far fa-newspaper fa-lg"></i><br>
                             News
                     </a>
-                    <a href="./weather.html" class="d-inline-block align-top text-center underline text-blue-600">
-                        <i class="fas fa-cloud-sun fa-lg text-blue-600"></i><br>
+                    <a href="./weather.html" class="d-inline-block align-top text-center" id="nav-links">
+                        <i class="fas fa-cloud-sun fa-lg"></i><br>
                             Weather
                     </a>
                 </div>
             </div>
         </nav>
-        <main class="px-6 py-4">
+        <header>
+            <h1>Weather</h1>
+        </header>
+        <main class="px-6 py-4 page-contents" id="weather-page">
             <div id="search-box">
                 <form id="city-search-form">
                     <input type="text" id="city-input" placeholder="Search for a city...">
