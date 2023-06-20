@@ -17,8 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
     } else if(city) {
         getWeatherByCity(city);
         getForecastByCity(city);
-    } else {
-        console.log("No location or city data available in local storage.");
     }
 
     document.getElementById('city-search-form').addEventListener('click', function(e) {

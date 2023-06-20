@@ -11,8 +11,6 @@ function submitHandler(event) {
 
   if(cat != defaultOptionEl.value){
     fetchNews(cat);
-  } else {
-    console.log("Invalid");
   }
 }
 
@@ -47,8 +45,6 @@ function fetchNews(cat) {
 }
 
 function renderNews(cat, news) {
-  console.log(news);
-
   if(cat != 'news') {
     cat = cat.charAt(0).toUpperCase() + cat.slice(1) + " News";
   } else {
