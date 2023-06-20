@@ -4,7 +4,7 @@ body {
 
 .navbar {
     background-image: linear-gradient(to top,rgb(46 53 93),rgb(0 0 0));
-    height: 100px;
+    min-height: 100px;
 }
 
 .nav-items {
@@ -128,12 +128,6 @@ button {
     }
 }
 
-@media screen and (min-width: 2000px) {
-    #home-page {
-        padding: 0 15%;
-    }
-}
-
 @media screen and (max-width: 768px) {
     .news {
         flex-direction: row;
@@ -157,4 +151,11 @@ button {
         border-radius: 3px 0 0 3px;
     }
 
+}
+
+@media screen and (max-width: 510px) {
+    .navbar .container-fluid {
+        display: flex;
+        flex-direction: column;
+    }
 }
