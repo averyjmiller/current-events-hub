@@ -1,10 +1,19 @@
+:root {
+    --main-color: #2e355d;
+    --secondary-color: #97c9ff;
+    --bg-color: #e7e7e7;
+}
+
 body {
-    background-color: #e7e7e7;
+    background-color: var(--bg-color);
 }
 
 .navbar {
-    background-image: linear-gradient(to top,rgb(46 53 93),rgb(0 0 0));
-    min-height: 100px;
+    background-image: linear-gradient(to top, var(--main-color),rgb(0 0 0));
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
 }
 
 .nav-items {
@@ -28,14 +37,24 @@ body {
     color: white;
 }
 
+header {
+    padding-top: 70px;
+}
+
+#header-line {
+    width: 50%;
+    border-bottom: 1px solid var(--main-color);
+    margin: 0 auto;
+}
+
 h1 {
     text-align: center;
     margin-bottom: 0px;
     font-size: 300%;
     font-weight: bolder;
-    background-image: linear-gradient(to top,#e7e7e7, #e7e7e7, #e7e7e7,rgb(151 201 255));
+    background-image: linear-gradient(to top,var(--bg-color), var(--bg-color), var(--bg-color), var(--secondary-color));
     padding: 30px 30px 10px 30px;
-    color: rgb(46 53 93);
+    color: var(--main-color);
 }
 
 aside {
@@ -157,5 +176,13 @@ button {
     .navbar .container-fluid {
         display: flex;
         flex-direction: column;
+    }
+
+    .navbar {
+        height: 120px;
+    }
+
+    header {
+        padding-top: 120px;
     }
 }
