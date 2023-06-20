@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const api_key = "11944d78b578fc7016e5a575aaac5c41";
     const units = "imperial";
     
-    let cityHistory = [];
+    var uhub = JSON.parse(localStorage.getItem("uhub"));
+    let cityHistory = uhub.savedLocations;
 
-    let uhub = JSON.parse(localStorage.getItem("uhub"));
     let latitude = uhub.homeLocation.lat;
     let longitude = uhub.homeLocation.lon;
     let city = uhub.homeLocation.city;
@@ -128,12 +128,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function addToHistory(city) {
-        cityHistory = cityHistory.filter(c => c.toLowerCase() !== city.toLowerCase());
-        cityHistory.unshift(city);
-        cityHistory = cityHistory.slice(0, 5);
+        var uhub = JSON.parse(localStorage.getItem("uhub"));
+        let cityHistory = uhub.savedLocations;
+        cityHistory.push(city);
+        localStorage.setItem("uhub", JSON.stringify(uhub));
     }
 
     function updateCityHistory() {
+        var uhub = JSON.parse(localStorage.getItem("uhub"));
+        let cityHistory = uhub.savedLocations;
+
         let historyDisplay = document.getElementById('search-history');
         historyDisplay.innerHTML = '';
 
