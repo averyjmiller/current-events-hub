@@ -35,24 +35,36 @@ document.addEventListener("DOMContentLoaded", function() {
         let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=${units}`;
 
         fetch(api)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
                 displayWeather(data);
             });
+          } else {
+            fetchErrorModal(response.status + " - " + response.statusText);
+          }
+        })
+        .catch(function (error) {
+          fetchErrorModal(error);
+        });  
     }
 
     function getWeatherByCity(city) {
         let api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}&units=${units}`;
 
         fetch(api)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
                 displayWeather(data);
             });
+          } else {
+            fetchErrorModal(response.status + " - " + response.statusText);
+          }
+        })
+        .catch(function (error) {
+          fetchErrorModal(error);
+        });  
     }
 
     function displayWeather(data) {
@@ -74,24 +86,36 @@ document.addEventListener("DOMContentLoaded", function() {
         let api = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=${units}`;
 
         fetch(api)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
                 displayForecast(data);
             });
+          } else {
+            fetchErrorModal(response.status + " - " + response.statusText);
+          }
+        })
+        .catch(function (error) {
+          fetchErrorModal(error);
+        });  
     }
 
     function getForecastByCity(city) {
         let api = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api_key}&units=${units}`;
 
         fetch(api)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
                 displayForecast(data);
             });
+          } else {
+            fetchErrorModal(response.status + " - " + response.statusText);
+          }
+        })
+        .catch(function (error) {
+          fetchErrorModal(error);
+        });  
     }
 
     function displayForecast(data) {
