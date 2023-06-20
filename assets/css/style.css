@@ -1,7 +1,7 @@
 :root {
     --main-color: #2e355d;
     --secondary-color: #97c9ff;
-    --bg-color: #fdf6ec;
+    --bg-color: #f1f1f1;
 }
 
 body {
@@ -81,6 +81,10 @@ aside h2 {
     width: 100%;
     margin-bottom: 20px;
     background-color: white;
+}
+
+.news:hover {
+    transform: scale(1.01);
 }
 
 .news .content {

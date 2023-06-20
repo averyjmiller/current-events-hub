@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('city-input').focus();
+    
     const api_key = "11944d78b578fc7016e5a575aaac5c41";
     const units = "imperial";
     
