@@ -11,3 +11,27 @@ section.text-center {
   color: white;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
+
+#city-input {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#city-search-form button {
+  width: 80px;
+}
+
+#clear-search-btn {
+  background-color: rgb(236, 94, 94);
+}
+
+#search-history {
+  margin: 10px 0;
+}
+
+#search-history button {
+  margin-right: 5px;
+  min-width: 80px;
+  background-color: rgb(144, 80, 204);
+}
