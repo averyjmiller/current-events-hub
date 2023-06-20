@@ -167,10 +167,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         for(let i = 0; i < cityHistory.length; i++) {
             let btn = document.createElement('button');
-            btn.innerText = cityHistory[i];
+            var cityName =
+            cityHistory[i].charAt(0).toUpperCase()
+            + cityHistory[i].slice(1);
+            btn.innerText = cityName;
+            btn.value = cityHistory[i];
             btn.onclick = function() {
-                getWeatherByCity(cityHistory[i]);
-                getForecastByCity(cityHistory[i]);
+                getWeatherByCity(btn.value);
+                getForecastByCity(btn.value);
             };
             historyDisplay.appendChild(btn);
         }

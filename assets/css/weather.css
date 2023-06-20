@@ -33,5 +33,6 @@ section.text-center {
 #search-history button {
   margin-right: 5px;
   min-width: 80px;
-  background-color: rgb(144, 80, 204);
+  background-color: rgb(189, 189, 189);
+  color: black;
 }
