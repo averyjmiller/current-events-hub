@@ -54,3 +54,7 @@ section.text-center {
   background-color: rgb(189, 189, 189);
   color: black;
 }
+
+.weather-cards > *:hover {
+  transform: scale(1.1);
+}

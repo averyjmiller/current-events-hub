@@ -46,18 +46,20 @@
                 </form>
                 <div id="search-history"></div>
             </div>
-            <section class="text-center mb-12 bg-blue-500 rounded p-4 max-w-lg mx-auto shadow-2xl" style="background-color: rgb(67, 170, 255);">
-                <i class="fas fa-sun fa-6x mb-4" id="current-weather-icon"></i>
-                <h2 class="text-4xl mb-2" id="city-name">City Name</h2>
-                <h4 class="text-2xl mb-2" id="current-date"></h4>
-                <h3 class="text-3xl mb-2" id="current-temp">Current Temperature</h3>
-                <div class="flex justify-around w-full text-xl mb-8" id="daily-temp">
-                    <span>High:</span>
-                    <span>Low:</span>
-                </div>
-            </section>
+            <div class="weather-cards">
+                <section class="text-center mb-12 bg-blue-500 rounded p-4 max-w-lg mx-auto shadow-2xl" style="background-color: rgb(67, 170, 255);">
+                    <i class="fas fa-sun fa-6x mb-4" id="current-weather-icon"></i>
+                    <h2 class="text-4xl mb-2" id="city-name">City Name</h2>
+                    <h4 class="text-2xl mb-2" id="current-date"></h4>
+                    <h3 class="text-3xl mb-2" id="current-temp">Current Temperature</h3>
+                    <div class="flex justify-around w-full text-xl mb-8" id="daily-temp">
+                        <span>High:</span>
+                        <span>Low:</span>
+                    </div>
+                </section>
+            </div>
             <section>
-            <div class="grid grid-cols-5 gap-4 mb-6">
+            <div class="grid grid-cols-5 gap-4 mb-6 weather-cards">
                 <div class="border rounded p-2 text-center shadow-2xl relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px; background-color: rgb(67, 170, 255);">
                     <span class="absolute top-2 left-2 text-sm" id="forecast-date-1">Day 1</span>
                     <i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-1"></i>
