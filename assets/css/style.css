@@ -91,6 +91,11 @@ button {
     height: 30px;
 }
 
+.cardLinks a {
+    text-decoration: none;
+}
+
+
 #add-task {
     border-radius: 50%;
     height: 30px;

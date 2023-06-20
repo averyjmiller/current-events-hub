@@ -450,11 +450,6 @@ document.addEventListener('DOMContentLoaded', function() {
     windSpeed1.textContent = weather.wind.speed + (" Mph");
   }
 
-  // Clicking cards to go to weather
-  function cardClick() {
-    window.location.href = "weather.html";
-  }
-
   function fetchSearchLocation(city, state){
     var uhub = JSON.parse(localStorage.getItem("uhub"));
 
