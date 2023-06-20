@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const api_key = "11944d78b578fc7016e5a575aaac5c41";
     const units = "imperial";
     
-    let cityHistory = [];
+    var uhub = JSON.parse(localStorage.getItem("uhub"));
+    let cityHistory = uhub.savedLocations;
 
-    let uhub = JSON.parse(localStorage.getItem("uhub"));
     let latitude = uhub.homeLocation.lat;
     let longitude = uhub.homeLocation.lon;
     let city = uhub.homeLocation.city;
@@ -35,24 +35,36 @@ document.addEventListener("DOMContentLoaded", function() {
         let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=${units}`;
 
         fetch(api)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
                 displayWeather(data);
             });
+          } else {
+            fetchErrorModal(response.status + " - " + response.statusText);
+          }
+        })
+        .catch(function (error) {
+          fetchErrorModal(error);
+        });  
     }
 
     function getWeatherByCity(city) {
         let api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}&units=${units}`;
 
         fetch(api)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
                 displayWeather(data);
             });
+          } else {
+            fetchErrorModal(response.status + " - " + response.statusText);
+          }
+        })
+        .catch(function (error) {
+          fetchErrorModal(error);
+        });  
     }
 
     function displayWeather(data) {
@@ -74,24 +86,36 @@ document.addEventListener("DOMContentLoaded", function() {
         let api = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=${units}`;
 
         fetch(api)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
                 displayForecast(data);
             });
+          } else {
+            fetchErrorModal(response.status + " - " + response.statusText);
+          }
+        })
+        .catch(function (error) {
+          fetchErrorModal(error);
+        });  
     }
 
     function getForecastByCity(city) {
         let api = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api_key}&units=${units}`;
 
         fetch(api)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
                 displayForecast(data);
             });
+          } else {
+            fetchErrorModal(response.status + " - " + response.statusText);
+          }
+        })
+        .catch(function (error) {
+          fetchErrorModal(error);
+        });  
     }
 
     function displayForecast(data) {
@@ -128,21 +152,29 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function addToHistory(city) {
-        cityHistory = cityHistory.filter(c => c.toLowerCase() !== city.toLowerCase());
-        cityHistory.unshift(city);
-        cityHistory = cityHistory.slice(0, 5);
+        var uhub = JSON.parse(localStorage.getItem("uhub"));
+        let cityHistory = uhub.savedLocations;
+        cityHistory.push(city);
+        localStorage.setItem("uhub", JSON.stringify(uhub));
     }
 
     function updateCityHistory() {
+        var uhub = JSON.parse(localStorage.getItem("uhub"));
+        let cityHistory = uhub.savedLocations;
+
         let historyDisplay = document.getElementById('search-history');
         historyDisplay.innerHTML = '';
 
         for(let i = 0; i < cityHistory.length; i++) {
             let btn = document.createElement('button');
-            btn.innerText = cityHistory[i];
+            var cityName =
+            cityHistory[i].charAt(0).toUpperCase()
+            + cityHistory[i].slice(1);
+            btn.innerText = cityName;
+            btn.value = cityHistory[i];
             btn.onclick = function() {
-                getWeatherByCity(cityHistory[i]);
-                getForecastByCity(cityHistory[i]);
+                getWeatherByCity(btn.value);
+                getForecastByCity(btn.value);
             };
             historyDisplay.appendChild(btn);
         }
