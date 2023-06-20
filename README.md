@@ -2,7 +2,7 @@
 
 ## Description
 * A browser ran dashboard for current news, forecast, and task manager.
-* Users are able to keep up to date on current events and weather forecast as well as manager their tasks for the day.
+* Users are able to keep up to date on current events and weather forecast as well as manage their tasks for the day.
 * U-Hub uses the users location to access accurate weather information for their area.
 * Users are able to select various topics to get relevant news information for.
 
