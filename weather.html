@@ -14,26 +14,30 @@
         <link rel="stylesheet" href="./assets/css/weather.css"/>
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
                 <span class="navbar-brand brand-text h1">U-HUB</span>
                 <div class="nav-items d-flex justify-content-end">
-                    <a href="./index.html" class="d-inline-block align-top text-center underline text-blue-600">
-                        <i class="fas fa-home fa-lg text-blue-600"></i><br>
+                    <a href="./index.html" class="d-inline-block align-top text-center" id="nav-links">
+                        <i class="fas fa-home fa-lg"></i><br>
                             Home
                     </a>
-                    <a href="./news.html" class="d-inline-block align-top text-center underline text-blue-600">
-                        <i class="far fa-newspaper fa-lg text-blue-600"></i><br>
+                    <a href="./news.html" class="d-inline-block align-top text-center" id="nav-links">
+                        <i class="far fa-newspaper fa-lg"></i><br>
                             News
                     </a>
-                    <a href="./weather.html" class="d-inline-block align-top text-center underline text-blue-600">
-                        <i class="fas fa-cloud-sun fa-lg text-blue-600"></i><br>
+                    <a href="./weather.html" class="d-inline-block align-top text-center" id="nav-links">
+                        <i class="fas fa-cloud-sun fa-lg"></i><br>
                             Weather
                     </a>
                 </div>
             </div>
         </nav>
-        <main class="px-6 py-4">
+        <header>
+            <h1>Weather</h1>
+            <div id="header-line"></div>
+        </header>
+        <main class="px-6 py-4 page-contents" id="weather-page">
             <div id="search-box">
                 <form id="city-search-form">
                     <input type="text" id="city-input" placeholder="Search for a city...">
@@ -42,18 +46,20 @@
                 </form>
                 <div id="search-history"></div>
             </div>
-            <section class="text-center mb-12 bg-blue-500 rounded p-4 max-w-lg mx-auto shadow-2xl" style="background-color: rgb(67, 170, 255);">
-                <i class="fas fa-sun fa-6x mb-4" id="current-weather-icon"></i>
-                <h2 class="text-4xl mb-2" id="city-name">City Name</h2>
-                <h4 class="text-2xl mb-2" id="current-date"></h4>
-                <h3 class="text-3xl mb-2" id="current-temp">Current Temperature</h3>
-                <div class="flex justify-around w-full text-xl mb-8" id="daily-temp">
-                    <span>High:</span>
-                    <span>Low:</span>
-                </div>
-            </section>
+            <div class="weather-cards">
+                <section class="text-center mb-12 bg-blue-500 rounded p-4 max-w-lg mx-auto shadow-2xl" style="background-color: rgb(67, 170, 255);">
+                    <i class="fas fa-sun fa-6x mb-4" id="current-weather-icon"></i>
+                    <h2 class="text-4xl mb-2" id="city-name">City Name</h2>
+                    <h4 class="text-2xl mb-2" id="current-date"></h4>
+                    <h3 class="text-3xl mb-2" id="current-temp">Current Temperature</h3>
+                    <div class="flex justify-around w-full text-xl mb-8" id="daily-temp">
+                        <span>High:</span>
+                        <span>Low:</span>
+                    </div>
+                </section>
+            </div>
             <section>
-            <div class="grid grid-cols-5 gap-4 mb-6">
+            <div class="grid grid-cols-5 gap-4 mb-6 weather-cards">
                 <div class="border rounded p-2 text-center shadow-2xl relative flex flex-col justify-center items-center weather-icon-container" style="height: 250px; background-color: rgb(67, 170, 255);">
                     <span class="absolute top-2 left-2 text-sm" id="forecast-date-1">Day 1</span>
                     <i class="fas fa-cloud fa-3x mb-2" id="forecast-icon-1"></i>

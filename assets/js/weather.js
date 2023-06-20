@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('city-input').focus();
+    
     const api_key = "11944d78b578fc7016e5a575aaac5c41";
     const units = "imperial";
     
@@ -15,18 +17,23 @@ document.addEventListener("DOMContentLoaded", function() {
     } else if(city) {
         getWeatherByCity(city);
         getForecastByCity(city);
-    } else {
-        console.log("No location or city data available in local storage.");
     }
 
-    document.getElementById('city-search-form').addEventListener('submit', function(e) {
+    document.getElementById('city-search-form').addEventListener('click', function(e) {
         e.preventDefault();
-        let city = document.getElementById('city-input').value;
-        if(city && !cityHistory.includes(city)) {
-            getWeatherByCity(city);
-            getForecastByCity(city);
-            addToHistory(city);
-            document.getElementById('city-input').value = '';
+        if(e.target.id == 'search-btn') {
+          let city = document.getElementById('city-input').value;
+          if(city && !cityHistory.includes(city)) {
+              getWeatherByCity(city);
+              getForecastByCity(city);
+              addToHistory(city);
+              document.getElementById('city-input').value = '';
+          }
+        } else if(e.target.id == 'clear-search-btn') {
+          let uhub = JSON.parse(localStorage.getItem("uhub"));
+          uhub.savedLocations = [];
+          localStorage.setItem("uhub", JSON.stringify(uhub));
+          updateCityHistory();
         }
     });
 

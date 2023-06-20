@@ -1,3 +1,21 @@
+:root {
+    --main-color: #2e355d;
+    --secondary-color: #97c9ff;
+    --bg-color: #f1f1f1;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+.navbar {
+    background-image: linear-gradient(to top, var(--main-color),rgb(0 0 0));
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+}
+
 .nav-items {
     margin-right: 20px;
 }
@@ -6,16 +24,41 @@
     margin-left: 50px;
 }
 
+#nav-links {
+    color: white;
+    text-decoration: none;
+}
+
+#nav-links:hover {
+    color: var(--secondary-color);
+}
+
 .brand-text {
     font-size: 2rem;
     margin-left: 20px;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
+    color: white;
 }
 
 header {
+    padding-top: 70px;
+}
+
+#header-line {
+    width: 50%;
+    border-bottom: 1px solid var(--main-color);
+    margin: 0 auto;
+}
+
+h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    font-size: 300%;
+    font-weight: bolder;
+    background-image: linear-gradient(to top,var(--bg-color), var(--bg-color), var(--bg-color), var(--secondary-color));
+    padding: 30px 30px 10px 30px;
+    color: var(--main-color);
 }
 
 aside {
@@ -26,9 +69,7 @@ aside {
 
 aside h2 {
     text-align: center;
-    background-color: lightgrey;
     margin: 0;
-    border-radius: 3px 3px 0 0;
     padding: 10px;
 }
 
@@ -39,6 +80,11 @@ aside h2 {
     border-radius: 5px;
     width: 100%;
     margin-bottom: 20px;
+    background-color: white;
+}
+
+.news:hover {
+    transform: scale(1.01);
 }
 
 .news .content {
@@ -104,14 +150,8 @@ button {
 }
 
 @media screen and (min-width: 1500px) {
-    .container-fluid {
-        width: 80%;
-    }
-}
-
-@media screen and (min-width: 2000px) {
-    .container-fluid {
-        width: 70%;
+    #home-page {
+        padding: 0 10%;
     }
 }
 
@@ -138,4 +178,19 @@ button {
         border-radius: 3px 0 0 3px;
     }
 
+}
+
+@media screen and (max-width: 510px) {
+    .navbar .container-fluid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar {
+        height: 120px;
+    }
+
+    header {
+        padding-top: 120px;
+    }
 }

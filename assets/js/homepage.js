@@ -139,12 +139,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function renderFeaturedNews(news) {
-    console.log(news);
-
     var newsContents= ``;
 
     for(var i = 0; i < news.length; i++) {
-      if(news[1].media) {
+      if(news[i].media) {
         var image = news[i].media;
       } else {
         var image = "./assets/images/default_news.jpeg";
