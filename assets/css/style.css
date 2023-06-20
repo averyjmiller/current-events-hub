@@ -29,6 +29,10 @@ body {
     text-decoration: none;
 }
 
+#nav-links:hover {
+    color: var(--secondary-color);
+}
+
 .brand-text {
     font-size: 2rem;
     margin-left: 20px;
