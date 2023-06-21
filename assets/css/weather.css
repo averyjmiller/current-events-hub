@@ -32,11 +32,8 @@ section.text-center {
   border: 1px solid lightgrey;
   border-radius: 5px;
   padding: 5px;
-}
-
-#city-input:focus {
-  box-shadow: 0px 0px 5px 0px rgb(67, 170, 255);
-  outline: none;
+  display: inline-block;
+  width: auto;
 }
 
 #city-search-form button {
