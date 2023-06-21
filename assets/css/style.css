@@ -137,6 +137,11 @@ h2 {
     justify-content: center;
 }
 
+#weather-condition {
+    height: 100%;
+    width: 100%;
+}
+
 button {
     border: none;
     border-radius: 5px;
@@ -147,6 +152,7 @@ button {
 
 .cardLinks a {
     text-decoration: none;
+    width: 175px;
 }
 
 #tasks-card .card-header {
@@ -169,6 +175,27 @@ button {
 @media screen and (min-width: 1500px) {
     #home-page {
         padding: 0 10%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #condition-cards {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #weather-condition {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #weather-condition img {
+        width: 25%;
+    }
+
+    .cardLinks a {
+        margin: 10px;
+        width: auto;
     }
 }
 
