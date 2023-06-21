@@ -24,6 +24,10 @@ section.text-center {
   border-right: 1px solid rgb(190, 190, 190);
 }
 
+#search-box form > * {
+  margin: 5px 0;
+}
+
 #city-input {
   border: 1px solid lightgrey;
   border-radius: 5px;
@@ -49,7 +53,7 @@ section.text-center {
 }
 
 #search-history button {
-  margin-right: 5px;
+  margin: 5px;
   min-width: 80px;
   background-color: rgb(189, 189, 189);
   color: black;
@@ -57,4 +61,17 @@ section.text-center {
 
 .weather-cards > *:hover {
   transform: scale(1.1);
+}
+
+@media screen and (max-width: 500px) { 
+  #search-box {
+    flex-direction: column;
+    align-items: center;
+  }  
+
+  #search-box form {
+    border-right: none;
+    padding: 10px;
+    border-bottom: 1px solid rgb(190, 190, 190);  
+  }
 }
