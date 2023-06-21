@@ -66,6 +66,10 @@ aside {
     flex-direction: column;
 }
 
+#home-page {
+    margin-top: 30px;
+}
+
 h2 {
     text-align: center;
     margin: 0;
@@ -164,6 +168,9 @@ button {
     background-image: linear-gradient(to top, var(--bg-color), var(--secondary-color));
 }
 
+#tasks i:hover {
+    transform: scale(1.5);
+}
 
 #add-task {
     border-radius: 50%;
