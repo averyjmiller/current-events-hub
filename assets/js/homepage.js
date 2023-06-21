@@ -1,11 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   // ------------TASK MANAGER--------------
   function renderTasks() {
-    const taskDateElement = document.getElementById('task-date');
-    const date = new Date();
-    const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-    taskDateElement.textContent = dateString;
-
     const tasksContainer = document.getElementById('tasks');
     tasksContainer.innerHTML = "";
     var uhub = JSON.parse(localStorage.getItem("uhub"));
@@ -425,9 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var uhub = JSON.parse(localStorage.getItem("uhub"));
 
     // Date
-    var timeStamp = weather.dt;
-    var day = new Date(timeStamp*1000);
-    var date = (day.toDateString());
+    var date = dayjs().format('dddd, MMMM D, YYYY');
     var dateTag = document.getElementById("date");
     dateTag.textContent = date;
     
