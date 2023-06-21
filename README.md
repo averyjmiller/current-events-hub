@@ -7,7 +7,6 @@
 * Users are able to select various topics to get relevant news information for.
 
 ## Installation
-
 1. Run U-Hub either through the deployed [Github Page](https://averyjmiller.github.io/u-hub/) or on your local machine. *Note: If you are choosing to run the application on your local machine, you must run it with a live server.*
 
 ## Usage
@@ -24,6 +23,10 @@
 * [NewsCatcher News API](https://newscatcherapi.com/)
 * [OpenWeather Weather API](https://openweathermap.org/)
 * [IPinfo.io IP API](https://ipinfo.io/)
+
+**CSS Frameworks**
+* [Bootstrap](https://getbootstrap.com/)
+* [Tailwind CSS](https://tailwindcss.com/)
 
 ## License
 Please refer to the `LICENSE` in the repo.
