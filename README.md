@@ -16,6 +16,8 @@
 3. Read through featured news articles on the homepage.
 4. Select various topics to recieve current news articles in the selected topic.
 5. Observe a five-day weather forecast for your location.
+---
+![Deployed Application](./assets/images/deployed.gif)
 
 ## Credits
 **APIs**
